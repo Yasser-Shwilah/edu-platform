@@ -9,7 +9,7 @@ class PendingUser extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'type',         // student أو instructor
+        'type',         
         'name',
         'email',
         'password',

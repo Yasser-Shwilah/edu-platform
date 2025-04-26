@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('instructor_id')->references('instructor_id')->on('instructors')->onDelete('cascade');
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

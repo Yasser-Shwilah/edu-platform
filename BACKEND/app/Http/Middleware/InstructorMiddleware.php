@@ -16,7 +16,6 @@ class InstructorMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        // التحقق إذا كان المستخدم من نوع "instructor"
         if (Auth::guard('instructor_api')->check()) {
             return $next($request);
         }

@@ -37,14 +37,14 @@ Route::post('/verify-code', [PasswordResetController::class, 'verifyResetCode'])
 
 
 Route::prefix('student')->group(function () {
-    Route::post('register', [StudentAuthController::class, 'register']);
-    Route::post('verify-otp', [StudentAuthController::class, 'verifyOtp']);
-    Route::post('login', [StudentAuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('verify-otp', [AuthController::class, 'verifyOtp']);
+    Route::post('login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('logout', [StudentAuthController::class, 'logout']);
 });
 
 Route::prefix('instructor')->group(function () {
-    Route::post('register', [InstructorAuthController::class, 'register']);
+    Route::post('register', [AuthController::class, 'register']);
     Route::post('verify-otp', [InstructorAuthController::class, 'verifyOtp']);
     Route::post('login', [InstructorAuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('logout', [InstructorAuthController::class, 'logout']);

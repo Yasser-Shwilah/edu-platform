@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Traits\ResponseTrait;
 
 class AdminAuthController extends Controller
 {
+    use ResponseTrait;
+
     public function showLoginForm()
     {
         return view('admin.login');
@@ -25,27 +28,21 @@ class AdminAuthController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return response()->json([
-                'message' => 'تم تسجيل الدخول بنجاح',
+            return $this->successResponse([
                 'user' => Auth::guard('web')->user(),
-            ]);
+            ], 'تم تسجيل الدخول بنجاح');
         }
 
-        throw ValidationException::withMessages([
-            'email' => ['البريد أو كلمة المرور غير صحيحة.'],
-        ]);
+        return $this->errorResponse('البريد أو كلمة المرور غير صحيحة.', 422);
     }
 
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json([
-            'message' => 'تم تسجيل الخروج بنجاح',
-        ]);
+        return $this->successResponse(null, 'تم تسجيل الخروج بنجاح');
     }
 
     public function register(Request $request)
@@ -64,9 +61,8 @@ class AdminAuthController extends Controller
 
         Auth::guard('web')->login($admin);
 
-        return response()->json([
-            'message' => 'تم إنشاء الحساب وتسجيل الدخول',
+        return $this->successResponse([
             'user' => $admin,
-        ]);
+        ], 'تم إنشاء الحساب وتسجيل الدخول');
     }
 }
