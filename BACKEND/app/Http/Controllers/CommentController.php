@@ -10,11 +10,11 @@ class CommentController extends Controller
 {
     use ResponseTrait;
 
-    public function index()
-    {
-        $comments = Comment::with('post', 'user')->get();
-        return $this->successResponse('تم جلب التعليقات بنجاح', $comments);
-    }
+    // public function index()
+    // {
+    //     $comments = Comment::with('post', 'user')->get();
+    //     return $this->successResponse('تم جلب التعليقات بنجاح', $comments);
+    // }
 
     public function postComments($postId)
     {

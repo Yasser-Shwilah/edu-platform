@@ -11,9 +11,16 @@ class ExamController extends Controller
 {
     use ResponseTrait;
 
-    public function index()
+    public function index(Request $request)
     {
-        $exams = Exam::with('course')->get();
+        $query = Exam::with('course');
+
+        if ($request->has('corrected')) {
+            $isCorrected = filter_var($request->corrected, FILTER_VALIDATE_BOOLEAN);
+            $query->where('is_corrected', $isCorrected);
+        }
+
+        $exams = $query->get();
         return $this->successResponse('تم جلب الامتحانات بنجاح', $exams);
     }
 
@@ -80,17 +87,5 @@ class ExamController extends Controller
         ]);
 
         return $this->successResponse('تم تصحيح الامتحان بنجاح', $exam);
-    }
-
-    public function correctedExams()
-    {
-        $correctedExams = Exam::where('is_corrected', true)->get();
-        return $this->successResponse('تم جلب الامتحانات المصححة بنجاح', $correctedExams);
-    }
-
-    public function uncorrectedExams()
-    {
-        $uncorrectedExams = Exam::where('is_corrected', false)->get();
-        return $this->successResponse('تم جلب الامتحانات غير المصححة بنجاح', $uncorrectedExams);
     }
 }
