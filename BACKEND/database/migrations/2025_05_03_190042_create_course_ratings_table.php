@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pending_users', function (Blueprint $table) {
+        Schema::create('course_ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('otp_code');
-            $table->timestamp('expires_at');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->unsignedTinyInteger('rating');
             $table->timestamps();
+
+            $table->unique(['user_id', 'course_id']);
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pending_users');
+        Schema::dropIfExists('course_ratings');
     }
 };

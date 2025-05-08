@@ -17,8 +17,13 @@ class Instructor extends Authenticatable
         'name',
         'email',
         'password',
+        'title',
+        'bio',
+        'avatar_url',
+        'phone',
         'department',
     ];
+
 
     protected $hidden = [
         'password',

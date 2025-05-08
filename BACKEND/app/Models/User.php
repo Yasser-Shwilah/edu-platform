@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'email',
@@ -47,5 +47,9 @@ class User extends Authenticatable
     public function isStudent()
     {
         return $this->role === 'student';
+    }
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class, 'user_id', 'id');
     }
 }

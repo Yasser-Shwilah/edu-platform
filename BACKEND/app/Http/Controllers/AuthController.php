@@ -6,7 +6,6 @@ use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\ValidationException;
 use App\Models\Student;
 use App\Models\Instructor;
 use App\Models\PendingUser;
@@ -22,9 +21,19 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:pending_users|unique:students,email|unique:instructors,email',
             'password' => 'required|string|min:6|confirmed',
+            'title' => 'required_if:type,instructor|string|nullable',
+            'bio' => 'required_if:type,instructor|string|nullable',
+            'avatar_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'phone' => 'required_if:type,instructor|string|nullable',
+            'department' => 'required_if:type,instructor|string|nullable',
         ]);
 
         $otp = rand(100000, 999999);
+
+        $avatarPath = null;
+        if ($request->hasFile('avatar_url')) {
+            $avatarPath = $request->file('avatar_url')->store('avatars', 'public');
+        }
 
         PendingUser::create([
             'type' => $request->type,
@@ -33,6 +42,11 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'otp_code' => $otp,
             'expires_at' => now()->addMinutes(15),
+            'title' => $request->title,
+            'bio' => $request->bio,
+            'avatar_url' => $avatarPath,
+            'phone' => $request->phone,
+            'department' => $request->department,
         ]);
 
         Mail::raw("رمز التحقق الخاص بك هو: $otp", function ($message) use ($request) {
@@ -42,7 +56,6 @@ class AuthController extends Controller
 
         return $this->successResponse('تم إرسال رمز التحقق إلى بريدك الإلكتروني.');
     }
-
     public function verifyOtp(Request $request)
     {
         $request->validate([
@@ -75,7 +88,11 @@ class AuthController extends Controller
                 'name' => $pending->name,
                 'email' => $pending->email,
                 'password' => $pending->password,
-                'department' => null,
+                'title' => $pending->title,
+                'bio' => $pending->bio,
+                'avatar_url' => $pending->avatar_url,
+                'phone' => $pending->phone,
+                'department' => $pending->department,
             ]);
 
             $token = $user->createToken('instructor-token')->plainTextToken;

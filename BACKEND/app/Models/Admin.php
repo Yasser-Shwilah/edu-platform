@@ -5,12 +5,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
     use HasFactory;
-
-    protected $primaryKey = 'admin_id';
+    use HasApiTokens;
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'email',
@@ -20,9 +21,4 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password',
     ];
-
-    public function createToken(string $name)
-    {
-        return $this->createToken($name)->plainTextToken;
-    }
 }

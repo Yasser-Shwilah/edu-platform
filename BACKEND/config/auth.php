@@ -40,16 +40,20 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-    ],
-    'student_api' => [
-        'driver' => 'token',
-        'provider' => 'students',
+        'student_api' => [
+            'driver' => 'sanctum',
+            'provider' => 'students',
+        ],
+        'instructor_api' => [
+            'driver' => 'sanctum',
+            'provider' => 'instructors',
+        ],
+        'admin' => [
+            'driver' => 'sanctum',
+            'provider' => 'admins',
+        ],
     ],
 
-    'instructor_api' => [
-        'driver' => 'token',
-        'provider' => 'instructors',
-    ],
 
     /*
     |--------------------------------------------------------------------------

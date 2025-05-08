@@ -14,7 +14,15 @@ class LectureController extends Controller
     {
         $lecture = Lecture::findOrFail($id);
 
-        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        // التحقق من انتماء الطالب للكورس
+        $enrolled = \App\Models\Enrollment::where('user_id', auth()->id())
+            ->where('course_id', $lecture->course_id)
+            ->exists();
+
+        if (!$enrolled) {
+            return $this->errorResponse('غير مصرح لك بمشاهدة هذه المحاضرة', 403);
+        }
+
         $disk = Storage::disk('public');
 
         if (!$disk->exists($lecture->content)) {
@@ -34,7 +42,14 @@ class LectureController extends Controller
     {
         $lecture = Lecture::findOrFail($id);
 
-        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $enrolled = \App\Models\Enrollment::where('user_id', auth()->id())
+            ->where('course_id', $lecture->course_id)
+            ->exists();
+
+        if (!$enrolled) {
+            return $this->errorResponse('غير مصرح لك بتحميل هذه المحاضرة', 403);
+        }
+
         $disk = Storage::disk('public');
 
         if (!$disk->exists($lecture->content)) {
