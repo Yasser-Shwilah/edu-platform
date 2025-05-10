@@ -14,7 +14,6 @@ class LectureController extends Controller
     {
         $lecture = Lecture::findOrFail($id);
 
-        // التحقق من انتماء الطالب للكورس
         $enrolled = \App\Models\Enrollment::where('user_id', auth()->id())
             ->where('course_id', $lecture->course_id)
             ->exists();
@@ -56,8 +55,11 @@ class LectureController extends Controller
             return $this->errorResponse('الملف غير موجود', 404);
         }
 
+        $lecture->increment('download_count');
+
         return $disk->download($lecture->content);
     }
+
     public function courseLectures($courseId)
     {
         $lectures = Lecture::where('course_id', $courseId)->get();
@@ -72,16 +74,25 @@ class LectureController extends Controller
             'course_id' => 'required|exists:courses,id',
         ]);
 
-        $filePath = $request->file('content')->store('lectures', 'public');
+        $file = $request->file('content');
+        $filePath = $file->store('lectures', 'public');
+        $fileUrl = Storage::disk('public')->url($filePath);
+        $fileSize = $file->getSize();
+        $fileType = $file->getClientOriginalExtension();
 
         $lecture = Lecture::create([
             'title' => $validated['title'],
             'content' => $filePath,
+            'url' => $fileUrl,
+            'size' => $fileSize,
+            'file_type' => $fileType,
+            'upload_date' => now(),
             'course_id' => $validated['course_id'],
         ]);
 
         return $this->successResponse('تم إنشاء المحاضرة بنجاح', $lecture, 201);
     }
+
 
     public function update(Request $request, $id)
     {
@@ -93,14 +104,20 @@ class LectureController extends Controller
         ]);
 
         if ($request->hasFile('content')) {
-            $filePath = $request->file('content')->store('lectures', 'public');
+            $file = $request->file('content');
+            $filePath = $file->store('lectures', 'public');
             $validated['content'] = $filePath;
+            $validated['url'] = Storage::disk('public')->url($filePath);
+            $validated['size'] = $file->getSize();
+            $validated['file_type'] = $file->getClientOriginalExtension();
+            $validated['upload_date'] = now();
         }
 
         $lecture->update($validated);
 
         return $this->successResponse('تم تحديث المحاضرة بنجاح', $lecture);
     }
+
 
     public function destroy($id)
     {

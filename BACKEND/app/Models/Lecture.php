@@ -14,8 +14,14 @@ class Lecture extends Model
     protected $fillable = [
         'title',
         'content',
+        'url',
+        'size',
+        'file_type',
+        'upload_date',
+        'download_count',
         'course_id',
     ];
+
 
     public function course()
     {
