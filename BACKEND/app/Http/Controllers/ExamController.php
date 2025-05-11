@@ -26,8 +26,8 @@ class ExamController extends Controller
 
     public function courseExams($courseId)
     {
-        $exams = Exam::where('course_id', $courseId)->get();
-        return $this->successResponse('تم جلب امتحانات الكورس بنجاح', $exams);
+        $exam = Exam::where('course_id', $courseId)->get();
+        return $this->successResponse('تم جلب امتحانات الكورس بنجاح', $exam);
     }
 
     public function store(Request $request)
@@ -96,7 +96,7 @@ class ExamController extends Controller
     $studentId = Auth::id();  // جلب ID الطالب من التوكن
     
     // الحصول على الامتحانات المرتبطة بالكورس
-    $exams = Exam::where('course_id', $courseId)
+    $exam = Exam::where('course_id', $courseId)
                 ->whereHas('course', function ($query) use ($studentId) {
                     $query->whereHas('students', function ($query) use ($studentId) {
                         $query->where('student_id', $studentId);
@@ -105,7 +105,7 @@ class ExamController extends Controller
                 ->get();
     
     // إرجاع الامتحانات
-    return $this->successResponse('تم جلب الامتحانات بنجاح', $exams);
+    return $this->successResponse('تم جلب الامتحانات بنجاح', $exam);
    }
 
    public function downloadExamFile($examId)
