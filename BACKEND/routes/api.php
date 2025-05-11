@@ -36,6 +36,13 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('student')->group(function () {
 
+
+        // Learning Paths
+        Route::prefix('learning-paths')->group(function () {
+            Route::get('/learning-paths', [LearningPathController::class, 'index']);
+            Route::get('/learning-paths/{id}', [LearningPathController::class, 'show']);
+        });
+        
         // Courses
         Route::prefix('courses')->group(function () {
             Route::get('/', [CourseController::class, 'index']);

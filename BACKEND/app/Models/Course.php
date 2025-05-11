@@ -28,4 +28,10 @@ class Course extends Model
     {
         return $this->hasMany(Lecture::class, 'course_id', 'course_id');
     }
+
+    public function learningPath()
+{
+    return $this->belongsTo(LearningPath::class);
+}
+
 }
