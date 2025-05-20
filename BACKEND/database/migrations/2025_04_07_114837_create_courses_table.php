@@ -14,10 +14,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('category');
-            $table->decimal('price', 8, 2);
             $table->foreignId('instructor_id')->constrained('users')->onDelete('cascade');
-            $table->string('pdf_path')->nullable()->after('price');
-            $table->string('video_url')->nullable()->after('pdf_path');
+            $table->enum('year',['سنة أولى','سنة ثانية','سنة ثالثة','سنة رابعة','سنة خامسة']);
+            $table->boolean('is_paid')->default(false);
+            $table->decimal('price', 8, 2)->default(false);
             $table->timestamps();
         });
     }

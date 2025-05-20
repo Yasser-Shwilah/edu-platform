@@ -7,17 +7,17 @@ use App\Models\Course;
 
 class CourseSubscriptionController extends Controller
 {
-    use Illuminate\Support\Facades\Auth;
 
-        public function __construct()
-            {
-                $this->middleware('auth:api'); // استخدام الـ token للتحقق من المستخدم
-            }
+
+            public function __construct()
+                {
+                    $this->middleware('auth:api'); // استخدام الـ token للتحقق من المستخدم
+                }
 
             public function subscribeToCourse(Request $request, $courseId)
             {
                 // جلب ID الطالب من الـ token
-                $studentId = Auth::id(); 
+                $studentId =auth()->id();
             
                 // التحقق مما إذا كان الطالب مشتركًا بالفعل في الكورس
                 $existingSubscription = Subscription::where('student_id', $studentId)

@@ -15,8 +15,9 @@ class LearningPath extends Model
     ];
 
     // علاقة: المسار يحتوي على عدة كورسات
+   
     public function courses()
     {
-        return $this->hasMany(Course::class);
+        return $this->belongsToMany(Course::class, 'path_courses');
     }
 }

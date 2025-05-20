@@ -26,12 +26,17 @@ class Course extends Model
 
     public function lectures()
     {
-        return $this->hasMany(Lecture::class, 'course_id', 'course_id');
+        return $this->hasMany(Lecture::class);
     }
 
-    public function learningPath()
-{
-    return $this->belongsTo(LearningPath::class);
-}
+    public function learningPaths()
+    {
+        return $this->belongsToMany(LearningPath::class, 'path_courses','path_id','id');
+    }
+    
+    public function exams()
+    {
+        return $this->hasMany(Exam::class);
+    }
 
 }

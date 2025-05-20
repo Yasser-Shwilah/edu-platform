@@ -12,10 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->string('title');
-            $table->json('questions');
-            $table->text('description')->nullable();
-            $table->timestamp('exam_date')->nullable();
-            $table->integer('duration')->nullable();
+            $table->string('url');
+            $table->string('duration')->nullable();
             $table->timestamps();
         });
     }

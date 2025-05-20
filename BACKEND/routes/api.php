@@ -12,6 +12,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\CourseSubscriptionController;
 
+use App\Http\Controllers\LearningPathController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,16 +41,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
         // Learning Paths
-        Route::prefix('learning-paths')->group(function () {
-            Route::get('/learning-paths', [LearningPathController::class, 'index']);
-            Route::get('/learning-paths/{id}', [LearningPathController::class, 'show']);
-        });
+            Route::prefix('learning-paths')->group(function () {
+                Route::get('/', [LearningPathController::class, 'index']);
+                    Route::get('/{id}/courses', [CourseController::class, 'index']);
+                    Route::get('/courses/{courseId}', [CourseController::class, 'show']);
+            });
+            
         
         // Courses
-        Route::prefix('courses')->group(function () {
-            Route::get('/', [CourseController::class, 'index']);
-            Route::get('/{id}', [CourseController::class, 'show']);
-        });
+       
+
 
          // Exams
          Route::prefix('exams')->group(function () {

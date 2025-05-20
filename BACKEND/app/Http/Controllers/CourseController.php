@@ -12,17 +12,48 @@ class CourseController extends Controller
 {
     use ResponseTrait;
 
-    public function index()
+    public function index(Request $request, $pathId)
     {
-        $courses = Course::with('instructor')->get();
+        $query = Course::with('instructor')
+            ->whereHas('learningPaths', function ($q) use ($pathId) {
+                $q->where('learning_paths.id', $pathId);
+            });
+    
+        // فلترة حسب اسم الكورس (بحث جزئي)
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+    
+        // فلترة حسب السنة الدراسية
+        if ($request->filled('year')) {
+            $query->where('year', $request->year);
+        }
+    
+        // فلترة حسب اسم الدكتور
+        if ($request->filled('instructor_name')) {
+            $query->whereHas('instructor', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->instructor_name . '%');
+            });
+        }
+    
+        $courses = $query->get();
+    
         return $this->successResponse('تم جلب الكورسات بنجاح', $courses);
     }
+    
 
     public function show($id)
     {
-        $course = Course::with('instructor', 'lectures')->findOrFail($id);
+        $course = Course::with('instructor','exams')->findOrFail($id);
+
+        $lectures = $course->lectures->groupBy('type');
+
+        $course->lectures_grouped = $lectures;
+        unset($course['lectures']);
         return $this->successResponse('تم جلب تفاصيل الكورس بنجاح', $course);
+        
     }
+
 
     public function store(Request $request)
     {

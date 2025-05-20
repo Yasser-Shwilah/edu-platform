@@ -24,7 +24,8 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $otp = rand(100000, 999999);
+        //$otp = rand(100000, 999999);
+        $otp=111111;
 
         PendingUser::create([
             'type' => $request->type,
@@ -34,12 +35,12 @@ class AuthController extends Controller
             'otp_code' => $otp,
             'expires_at' => now()->addMinutes(15),
         ]);
-
+/*
         Mail::raw("رمز التحقق الخاص بك هو: $otp", function ($message) use ($request) {
             $message->to($request->email)
                 ->subject('رمز التحقق من البريد الإلكتروني');
         });
-
+*/
         return $this->successResponse('تم إرسال رمز التحقق إلى بريدك الإلكتروني.');
     }
 

@@ -12,7 +12,7 @@ class LearningPlatformSeeder extends Seeder
     {
         // Create instructors
         $instructor1 = DB::table('users')->insertGetId([
-            'name' => 'Dr. Yasser',
+            'name' => 'د.سامي علي',
             'email' => 'yasser@example.com',
             'password' => Hash::make('password'),
             'role' => 'instructor',
@@ -21,7 +21,7 @@ class LearningPlatformSeeder extends Seeder
         ]);
 
         $instructor2 = DB::table('users')->insertGetId([
-            'name' => 'Dr. Ahmad',
+            'name' => 'د.أحمد علي',
             'email' => 'ahmad@example.com',
             'password' => Hash::make('password'),
             'role' => 'instructor',
@@ -31,35 +31,37 @@ class LearningPlatformSeeder extends Seeder
 
         // Create learning paths
         $path1 = DB::table('learning_paths')->insertGetId([
-            'name' => 'Web Development',
-            'description' => 'Learn full-stack web development.',
+            'name' => 'برمجة تطبيقات الويب',
+            'description' => 'تعلم كل شيء تحتاجه لتطوير تطبيقات الويب',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         $path2 = DB::table('learning_paths')->insertGetId([
-            'name' => 'Mobile Development',
-            'description' => 'Learn mobile apps development.',
+            'name' => 'برمجة تطبيقات الجوال',
+            'description' => 'ابن تطبيق الموبايل الخاص بك',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Create courses
         $course1 = DB::table('courses')->insertGetId([
-            'title' => 'Laravel Basics',
-            'description' => 'Introduction to Laravel framework.',
-            'category' => 'Backend Development',
-            'price' => 99.99,
+            'title' => 'أساسيات لارفل',
+            'description' => 'مقدمة عن لارفل',
+            'category' => 'برمجيات',
+            'price' => 100000,
+            'is_paid' => true,
             'instructor_id' => $instructor1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         $course2 = DB::table('courses')->insertGetId([
-            'title' => 'Flutter Development',
-            'description' => 'Building mobile apps with Flutter.',
-            'category' => 'Mobile Development',
-            'price' => 149.99,
+            'title' => 'تطوير تطبيقات الجوال',
+            'description' => 'بناء تطبيقات الجوال عن طريق فلاتر',
+            'category' => 'برمجيات',
+            'price' => 200000,
+            'is_paid' => true,
             'instructor_id' => $instructor2,
             'created_at' => now(),
             'updated_at' => now(),
@@ -74,16 +76,47 @@ class LearningPlatformSeeder extends Seeder
         // Create lectures
         DB::table('lectures')->insert([
             [
-                'title' => 'Introduction to Laravel',
+                'title' => 'المحاضرة الأولى',
                 'content' => 'Laravel basics, installation, setup.',
                 'course_id' => $course1,
+                'type' => 'video',
+                'url' => 'https://www.youtube.com/watch?v=RbKEYDtkAJI',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Flutter Widgets',
+                'title' => 'المحاضرة الثانية',
                 'content' => 'Learn about different Flutter widgets.',
-                'course_id' => $course2,
+                'course_id' => $course1,
+                'type' => 'video',
+                'url' => 'https://www.youtube.com/watch?v=fWmkhW8Y-cM',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'المحاضرة الثالثة',
+                'content' => 'Learn about different Flutter widgets.',
+                'course_id' => $course1,
+                'type' => 'video',
+                'url' => 'https://www.youtube.com/watch?v=CikyLcP31Kw',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'المحاضرة الرابعة',
+                'content' => 'Learn about different Flutter widgets.',
+                'course_id' => $course1,
+                'type' => 'pdf',
+                'url' => env('APP_URL').'/laravel_tutoril.pdf',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'المحاضرة الخامسة',
+                'content' => 'Learn about different Flutter widgets.',
+                'course_id' => $course1,
+                'type' => 'pdf',
+                'url' => env('APP_URL').'/The-Clean-Coders-Guide-to-Laravel.pdf',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -114,8 +147,9 @@ class LearningPlatformSeeder extends Seeder
         // Create an exam for course1
         DB::table('exams')->insert([
             'title' => 'Laravel Exam',
-            'questions' => json_encode(['What is Laravel?', 'Explain MVC.']),
             'course_id' => $course1,
+            'url' => env('APP_URL').'/laravel_exam.pdf',
+            'duration' => 'ساعة واحدة',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

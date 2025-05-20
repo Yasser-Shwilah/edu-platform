@@ -12,6 +12,8 @@ return new class extends Migration
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('url');
+            $table->enum('type',['pdf','video']);
             $table->text('content');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->timestamps();
