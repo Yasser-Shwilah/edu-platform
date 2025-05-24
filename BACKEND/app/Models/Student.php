@@ -19,7 +19,7 @@ class Student extends Authenticatable
         'password',
         'academic_year',
         'specialization',
-        
+
     ];
 
     protected $hidden = [

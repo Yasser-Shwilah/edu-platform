@@ -52,4 +52,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Enrollment::class, 'user_id', 'id');
     }
+    public function trainingEnrollments()
+    {
+        return $this->hasMany(TrainingEnrollment::class);
+    }
+
+    public function trainingCertificates()
+    {
+        return $this->hasMany(TrainingCertificate::class);
+    }
 }

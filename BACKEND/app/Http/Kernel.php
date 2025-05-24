@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
             // قائمة الـ Middleware الخاصة بالـ API
             \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ],
     ];
 

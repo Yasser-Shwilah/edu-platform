@@ -967,6 +967,488 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Training Courses",
+					"item": [
+						{
+							"name": "view lessons",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-lessons/course/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-lessons",
+										"course",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "view subscribed lessons",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-lessons/5/view",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-lessons",
+										"5",
+										"view"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscribe to Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "38|dzrSHzrsEWyZ4lc3qmxSWsHnm29fzKLGc67WuXDMcf9e3864",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"course_id\": 5}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-courses/enroll",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-courses",
+										"enroll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show categories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "38|dzrSHzrsEWyZ4lc3qmxSWsHnm29fzKLGc67WuXDMcf9e3864",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"course_id\": 5}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-courses/category/1/more",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-courses",
+										"category",
+										"1",
+										"more"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show questions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "38|dzrSHzrsEWyZ4lc3qmxSWsHnm29fzKLGc67WuXDMcf9e3864",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"course_id\": 5}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-exams/5/questions",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-exams",
+										"5",
+										"questions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user Certificates",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-certificates/user/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-certificates",
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "send answers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "44|3NGNFEp6cSQtx5ZuVCoXslSD0SQUq1Bn0zKNL2oTc62b8d3b",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"answers\": {\r\n        \"1\": \"A\"\r\n    }\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-exams/5/submit",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-exams",
+										"5",
+										"submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check And Issue Certificate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-certificates/5/issue",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-certificates",
+										"5",
+										"issue"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "upload-image",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/VISION/OneDrive/Desktop/photo_2025-02-14_19-15-09.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/profile/upload-image",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"profile",
+										"upload-image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/profile/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"profile",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -2060,7 +2542,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"value": "31|mkQp9bbWjetfgcJaxvJVrA7pK3nrWiUPnnS6NA6Q14985f8b",
 											"type": "string"
 										}
 									]
@@ -2068,16 +2550,27 @@
 								"method": "PUT",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"course_id\": 1,\r\n  \"title\": \"Lecture Title\",\r\n  \"content\": \"Lecture Content\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "محاضرة محدثة",
+											"type": "text"
+										},
+										{
+											"key": "course_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"type": "file",
+											"src": "postman-cloud:///1ef94f82-c16d-49b0-9ba3-74a37975584e"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/instructor/lectures/2",
+									"raw": "http://127.0.0.1:8000/api/instructor/lectures/6",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -2090,7 +2583,7 @@
 										"api",
 										"instructor",
 										"lectures",
-										"2"
+										"6"
 									]
 								}
 							},
@@ -2387,6 +2880,229 @@
 		{
 			"name": "admin",
 			"item": [
+				{
+					"name": "Training Courses",
+					"item": [
+						{
+							"name": "Create Training Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"أساسيات تطوير الويب\",\r\n  \"description\": \"دورة شاملة للمبتدئين لتعلم أساسيات تطوير الويب باستخدام HTML, CSS, وJavaScript.\",\r\n  \"category_id\": 1,\r\n  \"certificate_type\": \"official\",\r\n  \"lessons\": [\r\n    {\r\n      \"title\": \"مقدمة إلى HTML\",\r\n      \"video_url\": \"https://example.com/videos/html-intro\",\r\n      \"duration\": 10\r\n    },\r\n    {\r\n      \"title\": \"العمل مع CSS\",\r\n      \"video_url\": \"https://example.com/videos/css\",\r\n      \"duration\": 15\r\n    }\r\n  ],\r\n  \"exam_questions\": [\r\n    {\r\n      \"question\": \"ما هو العنصر المسؤول عن تحديد عنوان الصفحة في HTML؟\",\r\n      \"option_a\": \"<body>\",\r\n      \"option_b\": \"<title>\",\r\n      \"option_c\": \"<head>\",\r\n      \"option_d\": \"<html>\",\r\n      \"correct_answer\": \"B\"\r\n    },\r\n    {\r\n      \"question\": \"أي خاصية CSS تُستخدم لتغيير لون الخلفية؟\",\r\n      \"option_a\": \"font-color\",\r\n      \"option_b\": \"bgcolor\",\r\n      \"option_c\": \"background-color\",\r\n      \"option_d\": \"color\",\r\n      \"correct_answer\": \"C\"\r\n    }\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create training-categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "46|iQowqveOoBvtpW9jPwJkIaWonz10H1sE2ygIrH9z62f70a51",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"البرمجة\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses/training-categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses",
+										"training-categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Lesson",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-lessons",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-lessons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Lesson",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-lessons/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-lessons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Lesson",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-lessons/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-lessons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "Admin Register",
 					"request": {

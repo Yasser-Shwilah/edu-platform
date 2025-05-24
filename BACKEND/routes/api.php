@@ -11,6 +11,14 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CourseVideoController;
+use App\Http\Controllers\TrainingCourseController;
+use App\Http\Controllers\TrainingCertificateController;
+use App\Http\Controllers\TrainingExamController;
+use App\Http\Controllers\TrainingLessonController;
+use App\Http\Controllers\AdminTrainingCourseController;
+use App\Http\Controllers\Api\ProfileController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +29,7 @@ use App\Http\Controllers\CourseVideoController;
 // ==========================
 // Public Routes
 // ==========================
+
 
 // Password Reset
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetCode']);
@@ -56,6 +65,47 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 // Student Protected Routes
 // ==========================
 Route::middleware('auth:sanctum')->prefix('student')->group(function () {
+
+    // ------------------------------
+    // Profile
+    // ------------------------------
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+    Route::post('/profile/upload-image', [ProfileController::class, 'uploadProfileImage']);
+
+    // ---------------------------
+    // Training Courses
+    // ---------------------------
+    Route::prefix('training-courses')->group(function () {
+        Route::get('/', [TrainingCourseController::class, 'index']);
+        Route::get('/{id}', [TrainingCourseController::class, 'show']);
+        Route::post('/enroll', [TrainingCourseController::class, 'enroll']);
+        Route::get('/category/{categoryId}/more', [TrainingCourseController::class, 'loadMoreCoursesByCategory']);
+    });
+
+    // ---------------------------
+    // Training Lessons
+    // ---------------------------
+    Route::prefix('training-lessons')->group(function () {
+        Route::get('/course/{courseId}', [TrainingLessonController::class, 'index']);
+        Route::get('/{lessonId}/view', [TrainingLessonController::class, 'viewLesson']);
+        Route::post('/{lessonId}/progress', [TrainingLessonController::class, 'updateLessonProgress']);
+    });
+
+    // ---------------------------
+    // Training Exams
+    // ---------------------------
+    Route::prefix('training-exams')->group(function () {
+        Route::get('/{courseId}/questions', [TrainingExamController::class, 'getExamQuestions']);
+        Route::post('/{courseId}/submit', [TrainingExamController::class, 'submitExam']);
+    });
+
+    // ---------------------------
+    // Training Certificates
+    // ---------------------------
+    Route::prefix('training-certificates')->group(function () {
+        Route::get('/user/{userId}', [TrainingCertificateController::class, 'userCertificates']);
+        Route::post('/{courseId}/issue', [TrainingCertificateController::class, 'checkAndIssueCertificate']);
+    });
 
     // Courses
     Route::prefix('courses')->group(function () {
@@ -157,6 +207,24 @@ Route::middleware('auth:sanctum')->prefix('instructor')->group(function () {
 // Admin Protected Routes
 // ==========================
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+
+    // ---------------------------
+    // Training Lessons Management
+    // ---------------------------
+    Route::prefix('training-lessons')->group(function () {
+        Route::post('/', [TrainingLessonController::class, 'store']);
+        Route::put('/{id}', [TrainingLessonController::class, 'update']);
+        Route::delete('/{id}', [TrainingLessonController::class, 'destroy']);
+    });
+    // ---------------------------
+    // Training Courses Management
+    // ---------------------------
+    Route::prefix('training-courses')->group(function () {
+        Route::post('/', [AdminTrainingCourseController::class, 'store']);
+        Route::post('/training-categories', [AdminTrainingCourseController::class, 'storeCategory']);
+
+        //index/show/update/delete 
+    });
 
     // Announcements Management (Admin Only)
     Route::prefix('announcements')->group(function () {

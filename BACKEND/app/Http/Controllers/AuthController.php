@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Student;
 use App\Models\Instructor;
 use App\Models\PendingUser;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -73,7 +74,7 @@ class AuthController extends Controller
         }
 
         if ($pending->type == 'student') {
-            $user = Student::create([
+            $user = User::create([
                 'name' => $pending->name,
                 'email' => $pending->email,
                 'password' => $pending->password,
@@ -84,7 +85,7 @@ class AuthController extends Controller
             $token = $user->createToken('student-token')->plainTextToken;
             $userType = 'student';
         } else {
-            $user = Instructor::create([
+            $user = User::create([
                 'name' => $pending->name,
                 'email' => $pending->email,
                 'password' => $pending->password,
@@ -117,9 +118,9 @@ class AuthController extends Controller
         ]);
 
         if ($request->type == 'student') {
-            $user = Student::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
         } else {
-            $user = Instructor::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
         }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
