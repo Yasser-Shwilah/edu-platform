@@ -12,7 +12,8 @@ class Announcement extends Model
         'expiry_date',
         'is_important',
         'course_id',
-        'created_by',
+        'created_by_id',
+        'created_by_type',
     ];
 
     public function course()
@@ -20,8 +21,8 @@ class Announcement extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function admin()
+    public function createdBy()
     {
-        return $this->belongsTo(Admin::class, 'created_by');
+        return $this->morphTo();
     }
 }

@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('academic_year')->nullable();
             $table->string('specialization')->nullable();
             $table->string('profile_image')->nullable();
+            $table->string('title')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('avatar_url')->nullable();
+            $table->string('phone')->nullable();
 
             $table->timestamps();
         });

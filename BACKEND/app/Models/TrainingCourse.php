@@ -1,13 +1,14 @@
 <?php
-
+    
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// app/Models/TrainingCourse.php
 class TrainingCourse extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'category_id',
@@ -18,8 +19,9 @@ class TrainingCourse extends Model
         'enrollment_count',
         'certificate_type',
         'is_certified',
+        'is_free',
+        'last_updated',
     ];
-
 
     public function category()
     {
@@ -44,5 +46,10 @@ class TrainingCourse extends Model
     public function exam()
     {
         return $this->hasOne(TrainingExam::class);
+    }
+
+    public function examQuestions()
+    {
+        return $this->hasMany(TrainingExamQuestion::class);
     }
 }

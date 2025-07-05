@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    // عرض بيانات البروفايل
     public function show($id)
     {
         $user = User::with([
@@ -45,7 +44,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    // رفع صورة البروفايل
     public function uploadProfileImage(Request $request)
     {
         $user = auth()->user();
@@ -54,12 +52,10 @@ class ProfileController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // حذف الصورة السابقة إن وجدت
         if ($user->profile_image) {
             Storage::disk('public')->delete($user->profile_image);
         }
 
-        // رفع الصورة الجديدة
         $path = $request->file('image')->store('profile_images', 'public');
 
         $user->update(['profile_image' => $path]);
@@ -67,6 +63,33 @@ class ProfileController extends Controller
         return response()->json([
             'message' => 'تم رفع صورة البروفايل بنجاح',
             'image_url' => asset('storage/' . $path),
+        ]);
+    }
+    public function updateStudentProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        // تأكد أن المستخدم طالب فقط
+        if (!$user->isStudent()) {
+            return response()->json([
+                'message' => 'فقط الطلاب يمكنهم تعديل هذه البيانات.'
+            ], 403);
+        }
+
+        $request->validate([
+            'academic_year' => 'nullable|string',
+            'specialization' => 'nullable|string',
+        ]);
+
+        $user->update([
+            'academic_year' => $request->academic_year,
+            'specialization' => $request->specialization,
+        ]);
+
+        return response()->json([
+            'message' => 'تم تحديث بيانات الطالب بنجاح.',
+            'academic_year' => $user->academic_year,
+            'specialization' => $user->specialization,
         ]);
     }
 }

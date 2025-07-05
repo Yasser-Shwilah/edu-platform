@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\TrainingCourse;
 use App\Models\TrainingLesson;
 use App\Models\TrainingCategory;
@@ -15,8 +14,11 @@ class AdminTrainingCourseController extends Controller
 {
     use ResponseTrait;
 
+    // إنشاء دورة تدريبية
     public function store(Request $request)
     {
+
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -25,6 +27,7 @@ class AdminTrainingCourseController extends Controller
             'lessons' => 'required|array|min:1',
             'lessons.*.title' => 'required|string|max:255',
             'lessons.*.video_url' => 'required|url',
+            'lessons.*.duration' => 'required|integer|min:1',
             'certificate_type' => 'required|in:attendance,official',
             'exam_questions' => 'nullable|array',
             'exam_questions.*.question' => 'required_with:exam_questions|string',
@@ -38,13 +41,11 @@ class AdminTrainingCourseController extends Controller
         try {
             DB::beginTransaction();
 
-            // رفع الصورة إن وُجدت
             $imagePath = null;
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('training_courses', 'public');
             }
 
-            // إنشاء الدورة
             $course = TrainingCourse::create([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -55,10 +56,9 @@ class AdminTrainingCourseController extends Controller
                 'rating' => 0,
                 'enrollment_count' => 0,
                 'last_updated' => now(),
-                'is_free' => true, // أو اجعلها ديناميكية لو في اشتراكات
+                'is_free' => true,
             ]);
 
-            // إضافة الدروس
             foreach ($request->lessons as $lesson) {
                 TrainingLesson::create([
                     'training_course_id' => $course->id,
@@ -68,7 +68,6 @@ class AdminTrainingCourseController extends Controller
                 ]);
             }
 
-            // إضافة أسئلة الامتحان إن كانت شهادة معتمدة
             if ($request->certificate_type === 'official' && $request->has('exam_questions')) {
                 foreach ($request->exam_questions as $question) {
                     TrainingExamQuestion::create([
@@ -90,8 +89,12 @@ class AdminTrainingCourseController extends Controller
             return $this->errorResponse('حدث خطأ أثناء إنشاء الدورة', [$e->getMessage()], 500);
         }
     }
+
+    // إنشاء تصنيف جديد
     public function storeCategory(Request $request)
     {
+
+
         $request->validate([
             'name' => 'required|string|max:255|unique:training_categories,name',
         ]);
@@ -101,5 +104,74 @@ class AdminTrainingCourseController extends Controller
         ]);
 
         return $this->successResponse('تم إنشاء التصنيف بنجاح', $category);
+    }
+
+    // عرض كل الدورات
+    public function index()
+    {
+
+
+        $courses = TrainingCourse::with('category')->latest()->paginate(10);
+        return $this->successResponse('قائمة الدورات التدريبية', $courses);
+    }
+
+    // عرض تفاصيل دورة واحدة
+    public function show($id)
+    {
+
+
+        $course = TrainingCourse::with(['category', 'lessons', 'examQuestions'])->findOrFail($id);
+        return $this->successResponse('تفاصيل الدورة التدريبية', $course);
+    }
+
+    // تحديث دورة
+    public function update(Request $request, $id)
+    {
+
+
+        $course = TrainingCourse::findOrFail($id);
+
+        $request->validate([
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'nullable|exists:training_categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'certificate_type' => 'nullable|in:attendance,official',
+            'is_free' => 'nullable|boolean',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('training_courses', 'public');
+                $course->image = $imagePath;
+            }
+
+            $course->update($request->only([
+                'title',
+                'description',
+                'category_id',
+                'certificate_type',
+                'is_free',
+            ]));
+
+            DB::commit();
+            return $this->successResponse('تم تحديث الدورة بنجاح', $course);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->errorResponse('حدث خطأ أثناء التحديث', [$e->getMessage()], 500);
+        }
+    }
+
+    // حذف دورة
+    public function destroy($id)
+    {
+
+
+        $course = TrainingCourse::findOrFail($id);
+        $course->delete();
+
+        return $this->successResponse('تم حذف الدورة بنجاح');
     }
 }

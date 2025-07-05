@@ -20,7 +20,12 @@ class User extends Authenticatable
         'department',
         'academic_year',
         'specialization',
+        'title',
+        'bio',
+        'avatar_url',
+        'phone',
     ];
+
 
     protected $hidden = [
         'password',
@@ -60,5 +65,18 @@ class User extends Authenticatable
     public function trainingCertificates()
     {
         return $this->hasMany(TrainingCertificate::class);
+    }
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'instructor_id', 'id');
+    }
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function savedPosts()
+    {
+        return $this->belongsToMany(Blog::class, 'saved_posts');
     }
 }

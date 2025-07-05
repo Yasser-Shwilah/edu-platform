@@ -2,21 +2,74 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Enrollment;
-use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Traits\ResponseTrait;
+use App\Models\Course;
+use App\Models\Enrollment;
 use App\Models\CourseRating;
+use App\Models\CourseVideo;
+use App\Models\VideoProgress;
+use App\Models\User;
+use App\Traits\ResponseTrait;
 
 class CourseController extends Controller
 {
     use ResponseTrait;
 
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::with('instructor')->get();
+        $query = Course::with(['instructor:id,name,email,avatar_url']);
+
+        if ($request->filled('specialization') || $request->filled('year')) {
+            $query->where(function ($q) use ($request) {
+                if ($request->filled('specialization')) {
+                    $q->where('specialization', $request->specialization);
+                }
+                if ($request->filled('year')) {
+                    $q->where('year', $request->year);
+                }
+            });
+        }
+
+        if ($request->filled('instructor_name') || $request->filled('instructor_email')) {
+            $query->whereHas('instructor', function ($q) use ($request) {
+                if ($request->filled('instructor_name')) {
+                    $q->where('name', 'like', '%' . $request->instructor_name . '%');
+                }
+                if ($request->filled('instructor_email')) {
+                    $q->where('email', 'like', '%' . $request->instructor_email . '%');
+                }
+            });
+        }
+
+        if ($request->filled('instructor_id')) {
+            $query->where('instructor_id', $request->instructor_id);
+        }
+
+        $courses = $query->get()->map(function ($course) {
+            return [
+                'id' => $course->id,
+                'title' => $course->title,
+                'description' => $course->description,
+                'price' => $course->price,
+                'is_free' => (bool) $course->is_free,
+                'rating' => $course->rating,
+                'year' => $course->year,
+                'specialization' => $course->specialization,
+                'instructor' => $course->instructor ? [
+                    'id' => $course->instructor->id,
+                    'name' => $course->instructor->name,
+                    'email' => $course->instructor->email,
+                    'avatar_url' => $course->instructor->avatar_url,
+                ] : null,
+            ];
+        });
+
         return $this->successResponse('تم جلب الكورسات بنجاح', $courses);
     }
+
+
+
+
 
     public function show($id)
     {
@@ -31,42 +84,40 @@ class CourseController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'category' => 'required|string|max:100',
-            'instructor_id' => 'required|exists:users,id',
             'year' => 'required|in:first,second,third,fourth,fifth',
             'specialization' => 'required|in:general,software,networking,ai',
             'lessons_count' => 'nullable|integer|min:0',
-            'last_updated' => 'nullable|date',
-            'is_free' => 'nullable|in:true,false,1,0',
+            'is_free' => 'nullable|boolean',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rating' => 'nullable|numeric|min:0|max:5',
             'enrollment_count' => 'nullable|integer|min:0',
         ]);
+
+
+        $validated['instructor_id'] = auth()->id();
+
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('thumbnails', 'public');
             $validated['thumbnail_url'] = asset('storage/' . $path);
         }
 
-
-
         $course = Course::create($validated);
-
         return $this->successResponse('تم إنشاء الكورس بنجاح', $course, 201);
     }
+
+
 
     public function update(Request $request, $id)
     {
         $course = Course::findOrFail($id);
-
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
             'category' => 'required|string|max:100',
-            'instructor_id' => 'required|exists:users,id',
             'year' => 'required|in:first,second,third,fourth,fifth',
             'specialization' => 'required|in:general,software,networking,ai',
             'lessons_count' => 'nullable|integer|min:0',
-            'last_updated' => 'nullable|date',
             'is_free' => 'nullable|in:true,false,1,0',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rating' => 'nullable|numeric|min:0|max:5',
@@ -75,7 +126,6 @@ class CourseController extends Controller
 
 
         $course->update($validated);
-
         return $this->successResponse('تم تحديث الكورس بنجاح', $course);
     }
 
@@ -83,57 +133,105 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
         $course->delete();
-
         return $this->successResponse('تم حذف الكورس بنجاح');
     }
 
-    public function enroll(Request $request)
+    public function instructorProfile($id)
     {
-        $validated = $request->validate([
-            'course_id' => 'required|exists:courses,id',
+        $instructor = User::with('courses')->findOrFail($id);
+
+        return $this->successResponse('تم جلب معلومات المحاضر والكورسات', [
+            'name' => $instructor->name,
+            'email' => $instructor->email,
+            'department' => $instructor->department,
+            'specialization' => $instructor->specialization ?? 'غير محدد',
+            'courses' => $instructor->courses
         ]);
-
-        $userId = auth()->id();
-        $courseId = $validated['course_id'];
-
-        $existing = Enrollment::where('user_id', $userId)
-            ->where('course_id', $courseId)
-            ->first();
-
-        if ($existing) {
-            return $this->errorResponse('أنت مسجل بالفعل في هذا الكورس', 409);
-        }
-
-        Enrollment::create([
-            'user_id' => $userId,
-            'course_id' => $courseId,
-            'status' => 'approved',
-        ]);
-
-        $course = Course::find($courseId);
-        $course->increment('enrollment_count');
-
-        return $this->successResponse('تم التسجيل في الكورس بنجاح');
     }
 
-    public function rate(Request $request)
+    public function studentProgress($course_id)
+    {
+        $userId = auth()->id();
+
+        $total = CourseVideo::where('course_id', $course_id)->count();
+        $completed = VideoProgress::where('user_id', $userId)
+            ->where('course_id', $course_id)
+            ->count();
+
+        $progress = $total > 0 ? round(($completed / $total) * 100) : 0;
+
+        return $this->successResponse('تم حساب التقدم بنجاح', [
+            'total_videos' => $total,
+            'watched_videos' => $completed,
+            'progress_percent' => $progress
+        ]);
+    }
+
+    public function markVideoAsWatched(Request $request)
     {
         $validated = $request->validate([
             'course_id' => 'required|exists:courses,id',
-            'rating' => 'required|integer|min:1|max:5',
+            'video_id' => 'required|exists:course_videos,id',
         ]);
 
         $userId = auth()->id();
-        $courseId = $validated['course_id'];
 
-        CourseRating::updateOrCreate(
-            ['user_id' => $userId, 'course_id' => $courseId],
-            ['rating' => $validated['rating']]
-        );
+        $exists = VideoProgress::where('user_id', $userId)
+            ->where('course_id', $validated['course_id'])
+            ->where('video_id', $validated['video_id'])
+            ->exists();
 
-        $average = CourseRating::where('course_id', $courseId)->avg('rating');
-        Course::where('id', $courseId)->update(['rating' => $average]);
+        if ($exists) {
+            return $this->successResponse('تم تسجيل المشاهدة مسبقاً');
+        }
 
-        return $this->successResponse('تم تسجيل تقييمك بنجاح');
+        VideoProgress::create([
+            'user_id' => $userId,
+            'course_id' => $validated['course_id'],
+            'video_id' => $validated['video_id'],
+        ]);
+
+        return $this->successResponse('تم تسجيل الفيديو كمشاهد');
+    }
+
+    public function courseVideosWithProgress($course_id)
+    {
+        $userId = auth()->id();
+
+        $isEnrolled = Enrollment::where('user_id', $userId)
+            ->where('course_id', $course_id)
+            ->exists();
+
+        if (!$isEnrolled) {
+            return $this->errorResponse('غير مسموح لك بمشاهدة الفيديوهات، يجب أن تكون مسجلاً في الكورس', 403);
+        }
+
+        $videos = CourseVideo::where('course_id', $course_id)->orderBy('id')->get();
+
+        $watched = VideoProgress::where('user_id', $userId)
+            ->where('course_id', $course_id)
+            ->pluck('video_id')
+            ->toArray();
+
+        $videosWithProgress = $videos->map(function ($video) use ($watched) {
+            return [
+                'id' => $video->id,
+                'title' => $video->title,
+                'video_url' => asset('storage/' . $video->video_url),
+                'type' => $video->type,
+                'watched' => in_array($video->id, $watched)
+            ];
+        });
+
+        $total = $videos->count();
+        $completed = count($watched);
+        $progress = $total > 0 ? round(($completed / $total) * 100) : 0;
+
+        return $this->successResponse('فيديوهات الكورس مع التقدم', [
+            'videos' => $videosWithProgress,
+            'total_videos' => $total,
+            'watched_videos' => $completed,
+            'progress_percent' => $progress
+        ]);
     }
 }

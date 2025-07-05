@@ -6,8 +6,6 @@ use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Models\Student;
-use App\Models\Instructor;
 use App\Models\PendingUser;
 use App\Models\User;
 
@@ -20,14 +18,17 @@ class AuthController extends Controller
         $request->validate([
             'type' => 'required|in:student,instructor',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:pending_users|unique:students,email|unique:instructors,email',
+            'email' => 'required|email|unique:pending_users|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
             'title' => 'required_if:type,instructor|string|nullable',
             'bio' => 'required_if:type,instructor|string|nullable',
             'avatar_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'phone' => 'required_if:type,instructor|string|nullable',
             'department' => 'required_if:type,instructor|string|nullable',
+            'academic_year' => 'nullable|string',
+            'specialization' => 'nullable|string',
         ]);
+
 
         $otp = rand(100000, 999999);
 
@@ -48,6 +49,8 @@ class AuthController extends Controller
             'avatar_url' => $avatarPath,
             'phone' => $request->phone,
             'department' => $request->department,
+            'academic_year' => $request->academic_year,
+            'specialization' => $request->specialization,
         ]);
 
         Mail::raw("رمز التحقق الخاص بك هو: $otp", function ($message) use ($request) {
@@ -57,6 +60,7 @@ class AuthController extends Controller
 
         return $this->successResponse('تم إرسال رمز التحقق إلى بريدك الإلكتروني.');
     }
+
     public function verifyOtp(Request $request)
     {
         $request->validate([
@@ -78,8 +82,9 @@ class AuthController extends Controller
                 'name' => $pending->name,
                 'email' => $pending->email,
                 'password' => $pending->password,
-                'academic_year' => null,
-                'specialization' => null,
+                'academic_year' => $pending->academic_year,
+                'specialization' => $pending->specialization,
+                'role' => 'student',
             ]);
 
             $token = $user->createToken('student-token')->plainTextToken;
@@ -94,6 +99,7 @@ class AuthController extends Controller
                 'avatar_url' => $pending->avatar_url,
                 'phone' => $pending->phone,
                 'department' => $pending->department,
+                'role' => 'instructor',
             ]);
 
             $token = $user->createToken('instructor-token')->plainTextToken;
@@ -117,14 +123,14 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if ($request->type == 'student') {
-            $user = User::where('email', $request->email)->first();
-        } else {
-            $user = User::where('email', $request->email)->first();
-        }
+        $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return $this->errorResponse('البيانات المدخلة غير صحيحة.', [], 422);
+        }
+
+        if ($user->role !== $request->type) {
+            return $this->errorResponse('نوع الحساب لا يتطابق مع البريد الإلكتروني.', [], 422);
         }
 
         $token = $user->createToken($request->type . '-token')->plainTextToken;

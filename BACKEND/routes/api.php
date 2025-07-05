@@ -17,6 +17,9 @@ use App\Http\Controllers\TrainingExamController;
 use App\Http\Controllers\TrainingLessonController;
 use App\Http\Controllers\AdminTrainingCourseController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\TagController;
+
 
 
 
@@ -71,6 +74,7 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
     // ------------------------------
     Route::get('/profile/{id}', [ProfileController::class, 'show']);
     Route::post('/profile/upload-image', [ProfileController::class, 'uploadProfileImage']);
+    Route::post('/student/update-profile', [ProfileController::class, 'updateStudentProfile']);
 
     // ---------------------------
     // Training Courses
@@ -113,6 +117,11 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
         Route::get('/{id}', [CourseController::class, 'show']);
         Route::post('/enroll', [CourseController::class, 'enroll']);
         Route::post('/rate', [CourseController::class, 'rate']);
+        Route::get('/progress/{course_id}', [CourseController::class, 'studentProgress']);
+        Route::get('/video-progress/course/{course_id}', [CourseController::class, 'courseVideosWithProgress']);
+        Route::post('/video-progress', [CourseController::class, 'markVideoAsWatched']);
+        Route::get('/course-video/{id}', [CourseVideoController::class, 'show']);
+        Route::get('/instructor/{id}', [CourseController::class, 'instructorProfile']);
     });
 
     // Lectures
@@ -129,13 +138,12 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
 
 
 
-    // Comments
     Route::prefix('comments')->group(function () {
-        Route::get('/post/{postId}', [CommentController::class, 'postComments']);
-        Route::post('/', [CommentController::class, 'store']);
+        Route::post('/{postId}', [CommentController::class, 'store']);
         Route::put('/{id}', [CommentController::class, 'update']);
         Route::delete('/{id}', [CommentController::class, 'destroy']);
     });
+
 
     // Exams
     Route::prefix('exams')->group(function () {
@@ -146,6 +154,25 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
     // Announcements (View Only)
     Route::prefix('announcements')->group(function () {
         Route::get('/course/{courseId}', [AnnouncementController::class, 'index']);
+    });
+
+    // Blog Routes for Student
+    Route::prefix('blogs')->group(function () {
+        Route::get('/', [BlogController::class, 'index']);
+        Route::get('/{id}', [BlogController::class, 'show']);
+        Route::post('/', [BlogController::class, 'store']);
+        Route::put('/{id}', [BlogController::class, 'update']);
+        Route::delete('/{id}', [BlogController::class, 'destroy']);
+        Route::post('/{id}/vote', [BlogController::class, 'vote']);
+        Route::post('/{id}/save', [BlogController::class, 'toggleSave']);
+        Route::get('/saved/list', [BlogController::class, 'savedPosts']);
+        Route::get('/search/query', [BlogController::class, 'search']);
+    });
+
+    // Tags for Student
+    Route::prefix('tags')->group(function () {
+        Route::get('/', [\App\Http\Controllers\TagController::class, 'index']);
+        Route::post('/', [\App\Http\Controllers\TagController::class, 'store']);
     });
 });
 
@@ -160,6 +187,7 @@ Route::middleware('auth:sanctum')->prefix('instructor')->group(function () {
         Route::post('/', [CourseController::class, 'store']);
         Route::put('/{id}', [CourseController::class, 'update']);
         Route::delete('/{id}', [CourseController::class, 'destroy']);
+        Route::get('/instructor/{id}', [CourseController::class, 'instructorProfile']);
     });
     // Videos
     Route::prefix('videos')->group(function () {
@@ -179,13 +207,12 @@ Route::middleware('auth:sanctum')->prefix('instructor')->group(function () {
 
 
 
-    // Comments
     Route::prefix('comments')->group(function () {
-        Route::get('/post/{postId}', [CommentController::class, 'postComments']);
-        Route::post('/', [CommentController::class, 'store']);
+        Route::post('/{postId}', [CommentController::class, 'store']);
         Route::put('/{id}', [CommentController::class, 'update']);
         Route::delete('/{id}', [CommentController::class, 'destroy']);
     });
+
 
     // Exams
     Route::prefix('exams')->group(function () {
@@ -197,9 +224,30 @@ Route::middleware('auth:sanctum')->prefix('instructor')->group(function () {
         Route::patch('/{id}/correct', [ExamController::class, 'correctExam']);
     });
 
-    // Announcements (View Only)
+    // Announcements 
     Route::prefix('announcements')->group(function () {
         Route::get('/course/{courseId}', [AnnouncementController::class, 'index']);
+        Route::post('/', [AnnouncementController::class, 'store']);
+        Route::put('/{id}', [AnnouncementController::class, 'update']);
+        Route::delete('/{id}', [AnnouncementController::class, 'destroy']);
+    });
+    // Blog Routes for Instructor
+    Route::prefix('blogs')->group(function () {
+        Route::get('/', [BlogController::class, 'index']);
+        Route::get('/{id}', [BlogController::class, 'show']);
+        Route::post('/', [BlogController::class, 'store']);
+        Route::put('/{id}', [BlogController::class, 'update']);
+        Route::delete('/{id}', [BlogController::class, 'destroy']);
+        Route::post('/{id}/vote', [BlogController::class, 'vote']);
+        Route::post('/{id}/save', [BlogController::class, 'toggleSave']);
+        Route::get('/saved/list', [BlogController::class, 'savedPosts']);
+        Route::get('/search/query', [BlogController::class, 'search']);
+    });
+
+    // Tags for Instructor
+    Route::prefix('tags')->group(function () {
+        Route::get('/', [\App\Http\Controllers\TagController::class, 'index']);
+        Route::post('/', [\App\Http\Controllers\TagController::class, 'store']);
     });
 });
 
@@ -221,13 +269,18 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     // ---------------------------
     Route::prefix('training-courses')->group(function () {
         Route::post('/', [AdminTrainingCourseController::class, 'store']);
-        Route::post('/training-categories', [AdminTrainingCourseController::class, 'storeCategory']);
+        Route::get('/', [AdminTrainingCourseController::class, 'index']);
+        Route::get('/{id}', [AdminTrainingCourseController::class, 'show']);
+        Route::put('/{id}', [AdminTrainingCourseController::class, 'update']);
+        Route::delete('/{id}', [AdminTrainingCourseController::class, 'destroy']);
 
-        //index/show/update/delete 
+        Route::post('/training-categories', [AdminTrainingCourseController::class, 'storeCategory']);
     });
 
-    // Announcements Management (Admin Only)
+
+    // Announcements Management 
     Route::prefix('announcements')->group(function () {
+        Route::get('/course/{courseId}', [AnnouncementController::class, 'index']);
         Route::post('/', [AnnouncementController::class, 'store']);
         Route::put('/{id}', [AnnouncementController::class, 'update']);
         Route::delete('/{id}', [AnnouncementController::class, 'destroy']);

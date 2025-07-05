@@ -1,0 +1,5206 @@
+{
+	"info": {
+		"_postman_id": "bc612d0f-ee68-40b9-8762-e66d92d0d017",
+		"name": "education-platform-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34718518",
+		"_collection_link": "https://backend-developers-0062.postman.co/workspace/backend-developers-Workspace~4cc0dc55-462e-48f0-888f-378d3e1dd84c/collection/34718518-bc612d0f-ee68-40b9-8762-e66d92d0d017?action=share&source=collection_link&creator=34718518"
+	},
+	"item": [
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "lectures",
+					"item": [
+						{
+							"name": "specific-course-lectures",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/lectures/course/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"lectures",
+										"course",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "view-lecture-content",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "7|m5pOz8XmRdTnCuuJTe46hUZApn8DofnPqlvEuUmh7489a892",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/lectures/5/view",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"lectures",
+										"5",
+										"view"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "download-the lecture",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "7|m5pOz8XmRdTnCuuJTe46hUZApn8DofnPqlvEuUmh7489a892",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/lectures/5/download",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"lectures",
+										"5",
+										"download"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|Tdj2p9q7XxyeQCzYgiVSXQfYTpxXh1d0kOJ7WyH957d34cb9",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"type\": \"student\",\r\n  \"name\": \"ياسر حسن\",\r\n  \"email\": \"yasser2.student@example.com\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"student\",\r\n    \"email\": \"yasser123@example.com\",\r\n    \"password\": \"password\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify-otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"instructor2@example.com\",\r\n  \"otp_code\": \"853197\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/verify-otp",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"verify-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "forgot-password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"student7@example.com\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/forgot-password",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify-code",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"student7@example.com\",\r\n  \"token\":\"789022\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/verify-code",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"verify-code"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "comments",
+					"item": [
+						{
+							"name": "Add Comment Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "70|2wIrysC82aGuAEoGgRj97NSvX41kQx54MSKYaV7Xd1f44595",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"مقال رائع جدًا، شكرًا على الشرح.\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/comments/7",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"comments",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "70|2wIrysC82aGuAEoGgRj97NSvX41kQx54MSKYaV7Xd1f44595",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"تم التعديل: مقال رائع ومفيد جدًا.\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/comments/8",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"comments",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comment Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "71|YFDgPw7AIm2DvAFzC8KWE8Zo2Xm8B8F7uB1YfwEDffd19ad1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/comments/9",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"comments",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "courses",
+					"item": [
+						{
+							"name": "show-course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "9|shykUug0UqPdjddvR3CAOc9lPijWb0xbypwUQ3bw6fd7785c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/courses/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"courses",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show-a course-exam",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|uh5O7h9FqOsaGwg5Ni99GyGdJo7rdhhyuKsXv8mI0a5ccd7c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/exams/course/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"exams",
+										"course",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all-courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "9|shykUug0UqPdjddvR3CAOc9lPijWb0xbypwUQ3bw6fd7785c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "enroll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "9|shykUug0UqPdjddvR3CAOc9lPijWb0xbypwUQ3bw6fd7785c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"course_id\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/courses/enroll",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"courses",
+										"enroll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rating",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "9|shykUug0UqPdjddvR3CAOc9lPijWb0xbypwUQ3bw6fd7785c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"course_id\":4,\r\n  \"rating\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/courses/rate",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"courses",
+										"rate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1. Filter Courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|OhRfj0ZEKWGQMswoYVR3IfB5etYYK40t3D6VZbZh59229600",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/courses?year=third&specialization=ai&instructor_name=د. احمد",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"courses"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "third"
+										},
+										{
+											"key": "specialization",
+											"value": "ai"
+										},
+										{
+											"key": "instructor_name",
+											"value": "د. احمد"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Instructor Profile with Courses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/instructor/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"instructor",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Course Videos with Progress",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/video-progress/course/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"video-progress",
+										"course",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Mark Video as Watched",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"video_id\": 12\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/video-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"video-progress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. Course Progress for Student",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/progress/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"progress",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. All Courses Progress for Student",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/my-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"my-progress"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "exams",
+					"item": [
+						{
+							"name": "show-corrected exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|uh5O7h9FqOsaGwg5Ni99GyGdJo7rdhhyuKsXv8mI0a5ccd7c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/exams?corrected=true",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"exams"
+									],
+									"query": [
+										{
+											"key": "corrected",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show-uncorrected exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|uh5O7h9FqOsaGwg5Ni99GyGdJo7rdhhyuKsXv8mI0a5ccd7c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/exams?corrected=false",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"exams"
+									],
+									"query": [
+										{
+											"key": "corrected",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all-exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 1,\r\n  \"content\": \"This is a new comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/exams",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"exams"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "announcements",
+					"item": [
+						{
+							"name": "Announcements",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "17|Xg85JrgMgTA7gFtGO2yLJh5qqSKzZzsWa8ZOgCGq432ac2d1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/announcements/course/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"announcements",
+										"course",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "videos",
+					"item": [
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "21|NuL5lyFsJtFWitFMFXXT63XJbWzulBoF3B8MYTtN64cd87e0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/videos/course/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"videos",
+										"course",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Videos by Course ID Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "21|NuL5lyFsJtFWitFMFXXT63XJbWzulBoF3B8MYTtN64cd87e0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/videos/course/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"videos",
+										"course",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Training Courses",
+					"item": [
+						{
+							"name": "view lessons",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-lessons/course/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-lessons",
+										"course",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "view subscribed lessons",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-lessons/5/view",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-lessons",
+										"5",
+										"view"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscribe to Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "38|dzrSHzrsEWyZ4lc3qmxSWsHnm29fzKLGc67WuXDMcf9e3864",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"course_id\": 5}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-courses/enroll",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-courses",
+										"enroll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show categories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "38|dzrSHzrsEWyZ4lc3qmxSWsHnm29fzKLGc67WuXDMcf9e3864",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"course_id\": 5}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-courses/category/1/more",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-courses",
+										"category",
+										"1",
+										"more"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show questions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "38|dzrSHzrsEWyZ4lc3qmxSWsHnm29fzKLGc67WuXDMcf9e3864",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"course_id\": 5}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-exams/5/questions",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-exams",
+										"5",
+										"questions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user Certificates",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-certificates/user/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-certificates",
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "send answers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "44|3NGNFEp6cSQtx5ZuVCoXslSD0SQUq1Bn0zKNL2oTc62b8d3b",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"answers\": {\r\n        \"1\": \"A\"\r\n    }\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-exams/5/submit",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-exams",
+										"5",
+										"submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check And Issue Certificate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-certificates/5/issue",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-certificates",
+										"5",
+										"issue"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "upload-image",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/VISION/OneDrive/Desktop/photo_2025-02-14_19-15-09.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/profile/upload-image",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"profile",
+										"upload-image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "45|R7Qqq7pNer3NitiCf5MmZopSRTZNgmXPLrpY6bqPdd09a7da",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/profile/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"profile",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blogs",
+					"item": [
+						{
+							"name": "جلب كل التدوينات",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "67|cE3ykSMWZuybESrnwmGlMDIHVrw6UUQmKW9DUV6kf480a748",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/blogs",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"blogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تفاصيل تدوينة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "67|cE3ykSMWZuybESrnwmGlMDIHVrw6UUQmKW9DUV6kf480a748",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/blogs/7",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"blogs",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تصويت على تدوينة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "67|cE3ykSMWZuybESrnwmGlMDIHVrw6UUQmKW9DUV6kf480a748",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"vote_type\": \"like\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/blogs/7/vote",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"blogs",
+										"7",
+										"vote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "منشوراتي المحفوظة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "67|cE3ykSMWZuybESrnwmGlMDIHVrw6UUQmKW9DUV6kf480a748",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/blogs/saved/list",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"blogs",
+										"saved",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "البحث في التدوينات",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "67|cE3ykSMWZuybESrnwmGlMDIHVrw6UUQmKW9DUV6kf480a748",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/blogs/search/query?q=laravel&tags=php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"blogs",
+										"search",
+										"query"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "laravel"
+										},
+										{
+											"key": "tags",
+											"value": "php"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "عرض الوسوم الشائعة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "65|z256Qk4puUnJmXQOsfZ8RuqMFK1vr6Y9UtJBoKzy7ba6240c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/student/tags",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"student",
+										"tags"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "حفظ/إلغاء حفظ تدوينة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "67|cE3ykSMWZuybESrnwmGlMDIHVrw6UUQmKW9DUV6kf480a748",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/blogs/7/save",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"blogs",
+										"7",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "إنشاء تدوينة جديدة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"article\",\n  \"title\": \"تجربة API\",\n  \"content\": \"هذا نص المحتوى\",\n  \"codeSnippet\": \"console.log('Hello')\",\n  \"tags\": [\"php\", \"laravel\"]\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تعديل التدوينة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{instructor_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"عنوان معدل\",\n  \"content\": \"محتوى جديد\",\n  \"tags\": [\"updated\", \"laravel\"]\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "حذف التدوينة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{instructor_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "حفظ/إلغاء حفظ تدوينة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/12/save",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"12",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "إنشاء وسم جديد Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{instructor_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"frontend\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/tags",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"tags"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "جلب كل التدوينات Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تفاصيل تدوينة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/12",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تصويت على تدوينة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"vote_type\": \"like\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/12/vote",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"12",
+										"vote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "منشوراتي المحفوظة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/saved/list",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"saved",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "البحث في التدوينات Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/search/query?q=laravel&tags=php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"search",
+										"query"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "laravel"
+										},
+										{
+											"key": "tags",
+											"value": "php"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "عرض الوسوم الشائعة Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "77|xQNfGhiFs5dcAVlAn2SV2geGLRAjP8Bmc2TnzvwAd79a0976",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/tags",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"tags"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Instructor",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "instructor",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "د. أحمد الزين",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ahmad.zain@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password123",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password123",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "أستاذ مساعد",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "أستاذ جامعي مختص في هندسة الذكاء الاصطناعي",
+											"type": "text"
+										},
+										{
+											"key": "avatar_url",
+											"type": "file",
+											"src": "postman-cloud:///1f028c57-f19c-48f0-b3b8-f0e27d5b44a6"
+										},
+										{
+											"key": "phone",
+											"value": "0988123456",
+											"type": "text"
+										},
+										{
+											"key": "department",
+											"value": "هندسة الحواسيب",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|aKRYdSj1CwrcdglAuOFGADKWjfF5j9PDiFGScK8ic3a3abca",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"instructor\",\r\n  \"email\": \"ahmad.zain@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify-otp Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"instructor2@example.com\",\r\n  \"otp_code\": \"853197\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/verify-otp",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"verify-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "forgot-password Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"student7@example.com\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/forgot-password",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify-code Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"student7@example.com\",\r\n  \"token\":\"789022\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/verify-code",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"verify-code"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "comments",
+					"item": [
+						{
+							"name": "add-comment Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "74|OuFT0TudVljrmwRC6PwrzNDVhWUkMsZumVYHoV1tcb493546",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content\": \"مقال رائع جدًا، شكرًا على الشرح.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/comments/7",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"comments",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete-comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 1,\r\n  \"content\": \"This is a new comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/comments/10",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"comments",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-comment Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|uh5O7h9FqOsaGwg5Ni99GyGdJo7rdhhyuKsXv8mI0a5ccd7c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content\": \"Updated comment content.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/comments/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "courses",
+					"item": [
+						{
+							"name": "all-courses Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|v9OTQzxuH0weOizsKmhjlUSvtPSysuwX2742HWnsa92ce658",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show-course Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "8|JBG4uOz9PRlZRdf1A3tT2DDyjyk7A3liAEi8ZNhre9996a10",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/courses/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"courses",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add-course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "8|JBG4uOz9PRlZRdf1A3tT2DDyjyk7A3liAEi8ZNhre9996a10",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "مقدمة في الذكاء الاصطناعي",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "هذا الكورس يشرح مفاهيم الذكاء الاصطناعي",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "برمجة",
+											"type": "text"
+										},
+										{
+											"key": "instructor_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "year",
+											"value": "third",
+											"type": "text"
+										},
+										{
+											"key": "specialization",
+											"value": "ai",
+											"type": "text"
+										},
+										{
+											"key": "lessons_count",
+											"value": "15",
+											"type": "text"
+										},
+										{
+											"key": "last_updated",
+											"value": "2025-05-04",
+											"type": "text"
+										},
+										{
+											"key": "is_free",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "4.7",
+											"type": "text"
+										},
+										{
+											"key": "enrollment_count",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "thumbnail",
+											"type": "file",
+											"src": "postman-cloud:///1f028c57-f19c-48f0-b3b8-f0e27d5b44a6"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "8|JBG4uOz9PRlZRdf1A3tT2DDyjyk7A3liAEi8ZNhre9996a10",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \" جافا\",\r\n  \"description\": \"شرح متكامل بلغة الجافا\",\r\n  \"price\": 20.5,\r\n  \"category\": \"برمجة\",\r\n  \"instructor_id\": 3,\r\n  \"year\": \"third\",\r\n  \"specialization\": \"software\",\r\n  \"lessons_count\": 10,\r\n  \"last_updated\": \"2025-04-01\",\r\n  \"is_free\": 0,\r\n  \"rating\": 0,\r\n  \"enrollment_count\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/courses/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"courses",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete-course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Course Title\",\r\n  \"description\": \"Course Description\",\r\n  \"price\": \"15\",\r\n  \"category\": \"frontend\",\r\n  \"instructor_id\": \"1\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/courses/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "exams",
+					"item": [
+						{
+							"name": "all-exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 1,\r\n  \"content\": \"This is a new comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show-course-exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 1,\r\n  \"content\": \"This is a new comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams/course/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams",
+										"course",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show-corrected exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 1,\r\n  \"content\": \"This is a new comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams?corrected=true",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams"
+									],
+									"query": [
+										{
+											"key": "corrected",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show-uncorrected exams",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 1,\r\n  \"content\": \"This is a new comment.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams?corrected=false",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams"
+									],
+									"query": [
+										{
+											"key": "corrected",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add-exams",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"course_id\": 2,\r\n  \"title\": \"Exam Title\",\r\n  \"questions\": [\r\n    {\r\n      \"question\": \"What is Laravel?\",\r\n      \"choices\": [\"Framework\", \"Library\", \"Tool\", \"CMS\"],\r\n      \"correct_answer\": \"Framework\"\r\n    }\r\n  ],\r\n  \"instructions\": \"Exam Instructions\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-exams",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"course_id\": 2,\r\n  \"title\": \"Exam Title\",\r\n  \"questions\": [\r\n    {\r\n      \"question\": \"What is Library?\",\r\n      \"choices\": [\"Framework\", \"Library\", \"Tool\", \"CMS\"],\r\n      \"correct_answer\": \"Library\"\r\n    }\r\n  ],\r\n  \"instructions\": \"Exam Instructions\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "exam-correction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "5|mZHLy9Cu1n8SbMDcBHEnc9kByyhWCVKy0YrRrrVoc1b71e19",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"score\": 95\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/exams/2/correct",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"exams",
+										"2",
+										"correct"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "lectures",
+					"item": [
+						{
+							"name": "specific-course-lectures Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/lectures/course/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"lectures",
+										"course",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add-lectures",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"course_id\": 2,\r\n  \"title\": \"Lecture Title\",\r\n  \"content\": \"Lecture Content\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/lectures",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"lectures"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-lectures",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "31|mkQp9bbWjetfgcJaxvJVrA7pK3nrWiUPnnS6NA6Q14985f8b",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "محاضرة محدثة",
+											"type": "text"
+										},
+										{
+											"key": "course_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"type": "file",
+											"src": "postman-cloud:///1ef94f82-c16d-49b0-9ba3-74a37975584e"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/lectures/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"lectures",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete-lectures",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"course_id\": 1,\r\n  \"title\": \"Lecture Title\",\r\n  \"content\": \"Lecture Content\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/lectures/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"lectures",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "videos",
+					"item": [
+						{
+							"name": "Store Video Lecture (Single Video Upload)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "21|NuL5lyFsJtFWitFMFXXT63XJbWzulBoF3B8MYTtN64cd87e0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Lecture Video Title",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "mp4",
+											"type": "text"
+										},
+										{
+											"key": "course_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "video",
+											"type": "file",
+											"src": "postman-cloud:///1f02b2a7-fd54-4730-8111-949a5c7e1fbc"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/videos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"videos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Videos by Course ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "21|NuL5lyFsJtFWitFMFXXT63XJbWzulBoF3B8MYTtN64cd87e0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/videos/course/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"videos",
+										"course",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Video",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "21|NuL5lyFsJtFWitFMFXXT63XJbWzulBoF3B8MYTtN64cd87e0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Updated Video Title",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "avi",
+											"type": "text"
+										},
+										{
+											"key": "video",
+											"type": "file",
+											"src": "postman-cloud:///1f02b2a7-fd54-4730-8111-949a5c7e1fbc"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/videos/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"videos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Video",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/instructor/videos/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"instructor",
+										"videos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "announcements",
+					"item": [
+						{
+							"name": "Announcements",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "18|u2Oqr7LbT2LmCcqoQeGpTHKBEZsnpDsYI6wNc1txe70db0c3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/announcements/course/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"announcements",
+										"course",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Announcement Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "8|TO63DXDzpUjJBPRAR4QxRh9d7Z1SX1zLFEfjZ61gf28c972e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"هذا إعلان هام من المحاضر أو الأدمن\",\n  \"publish_date\": \"2025-07-01\",\n  \"expiry_date\": \"2025-07-31\",\n  \"is_important\": true,\n  \"course_id\": 1\n}\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/announcements",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"announcements"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Announcement Copy",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"تم تعديل الإعلان\",\n  \"publish_date\": \"2025-05-05\",\n  \"expiry_date\": \"2025-06-01\",\n  \"is_important\": false,\n  \"course_id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/announcements/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"announcements",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Announcement Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/announcements/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"announcements",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blogs",
+					"item": [
+						{
+							"name": "إنشاء تدوينة جديدة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"article\",\n  \"title\": \"تجربة API\",\n  \"content\": \"هذا نص المحتوى\",\n  \"codeSnippet\": \"console.log('Hello')\",\n  \"tags\": [\"php\", \"laravel\"]\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تعديل التدوينة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{instructor_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"عنوان معدل\",\n  \"content\": \"محتوى جديد\",\n  \"tags\": [\"updated\", \"laravel\"]\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "حذف التدوينة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{instructor_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "حفظ/إلغاء حفظ تدوينة",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/12/save",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"12",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "إنشاء وسم جديد",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{instructor_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"frontend\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/tags",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"tags"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "جلب كل التدوينات Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تفاصيل تدوينة Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/12",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تصويت على تدوينة Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"vote_type\": \"like\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/12/vote",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"12",
+										"vote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "منشوراتي المحفوظة Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/saved/list",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"saved",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "البحث في التدوينات Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "75|BN8WwjRI1M4s89ggoH7jnUXmhcLA2wixLhLpxbJS2b4d26af",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/blogs/search/query?q=laravel&tags=php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"blogs",
+										"search",
+										"query"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "laravel"
+										},
+										{
+											"key": "tags",
+											"value": "php"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "عرض الوسوم الشائعة Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "77|xQNfGhiFs5dcAVlAn2SV2geGLRAjP8Bmc2TnzvwAd79a0976",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/tags",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"tags"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "comments",
+					"item": [
+						{
+							"name": "Add Comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "61|26ihDdYQPKUcz7Sz0bM5oRixukNYm4rgqaKg3Dwce5c317f0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"مقال رائع جدًا، شكرًا على الشرح.\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/comments/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"comments",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Comment Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "61|26ihDdYQPKUcz7Sz0bM5oRixukNYm4rgqaKg3Dwce5c317f0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"مقال رائع جدًا، شكرًا على الشرح.\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/comments/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"comments",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "61|26ihDdYQPKUcz7Sz0bM5oRixukNYm4rgqaKg3Dwce5c317f0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"تم التعديل: مقال رائع ومفيد جدًا.\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructor/comments/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructor",
+										"comments",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <YOUR_TOKEN>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/comments/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Training Courses",
+					"item": [
+						{
+							"name": "Create Training Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"أساسيات تطوير الويب\",\r\n  \"description\": \"دورة شاملة للمبتدئين لتعلم أساسيات تطوير الويب باستخدام HTML, CSS, وJavaScript.\",\r\n  \"category_id\": 1,\r\n  \"certificate_type\": \"official\",\r\n  \"lessons\": [\r\n    {\r\n      \"title\": \"مقدمة إلى HTML\",\r\n      \"video_url\": \"https://example.com/videos/html-intro\",\r\n      \"duration\": 10\r\n    },\r\n    {\r\n      \"title\": \"العمل مع CSS\",\r\n      \"video_url\": \"https://example.com/videos/css\",\r\n      \"duration\": 15\r\n    }\r\n  ],\r\n  \"exam_questions\": [\r\n    {\r\n      \"question\": \"ما هو العنصر المسؤول عن تحديد عنوان الصفحة في HTML؟\",\r\n      \"option_a\": \"<body>\",\r\n      \"option_b\": \"<title>\",\r\n      \"option_c\": \"<head>\",\r\n      \"option_d\": \"<html>\",\r\n      \"correct_answer\": \"B\"\r\n    },\r\n    {\r\n      \"question\": \"أي خاصية CSS تُستخدم لتغيير لون الخلفية؟\",\r\n      \"option_a\": \"font-color\",\r\n      \"option_b\": \"bgcolor\",\r\n      \"option_c\": \"background-color\",\r\n      \"option_d\": \"color\",\r\n      \"correct_answer\": \"C\"\r\n    }\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create training-categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "46|iQowqveOoBvtpW9jPwJkIaWonz10H1sE2ygIrH9z62f70a51",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"البرمجة\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses/training-categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses",
+										"training-categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Lesson",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-lessons",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-lessons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Lesson",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-lessons/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-lessons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Lesson",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-lessons/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-lessons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "قائمة الدورات التدريبية",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6|eSWMevMIQwD57EiDFWKNDufj9ZrgaFeZbJVixlU4930696e3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تفاصيل دورة تدريبية",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6|eSWMevMIQwD57EiDFWKNDufj9ZrgaFeZbJVixlU4930696e3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "تحديث دورة تدريبية",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6|eSWMevMIQwD57EiDFWKNDufj9ZrgaFeZbJVixlU4930696e3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"تحديث دورة Laravel\",\n  \"description\": \"تحديث المحتوى\",\n  \"certificate_type\": \"attendance\",\n  \"is_free\": true\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "حذف دورة تدريبية",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6|eSWMevMIQwD57EiDFWKNDufj9ZrgaFeZbJVixlU4930696e3",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/training-courses/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"training-courses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Admin Name\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"otp_code\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/verify-otp",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Announcement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|X7YUlR1zkM1iD2vJrBnjjOn7B3xNa4IuBSqM02wv6e753648",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"إعلان \",\n  \"publish_date\": \"2025-05-04\",\n  \"expiry_date\": \"2025-06-01\",\n  \"is_important\": true\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/announcements",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Announcement",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"تم تعديل الإعلان\",\n  \"publish_date\": \"2025-05-05\",\n  \"expiry_date\": \"2025-06-01\",\n  \"is_important\": false,\n  \"course_id\": 1\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/announcements/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"announcements",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Announcement",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/announcements/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"announcements",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

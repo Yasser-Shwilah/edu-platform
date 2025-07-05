@@ -30,8 +30,9 @@ class Course extends Model
 
     public function instructor()
     {
-        return $this->belongsTo(User::class, 'instructor_id', 'id');
+        return $this->belongsTo(User::class, 'instructor_id');
     }
+
 
     public function lectures()
     {
@@ -44,5 +45,17 @@ class Course extends Model
     public function videoLectures()
     {
         return $this->hasMany(CourseLecture::class, 'course_id', 'id')->where('type', 'video');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($course) {
+            $course->last_updated = now();
+        });
+
+        static::creating(function ($course) {
+            $course->last_updated = now();
+        });
     }
 }

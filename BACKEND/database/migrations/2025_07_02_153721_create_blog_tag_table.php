@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('training_courses', function (Blueprint $table) {
-            $table->dropColumn('slug');
+        Schema::create('blog_tag', function (Blueprint $table) {
+            $table->foreignId('blog_id')->constrained('blogs')->cascadeOnDelete();
+            $table->foreignId('tag_id')->constrained('tags')->cascadeOnDelete();
+            $table->primary(['blog_id', 'tag_id']);
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('training_courses', function (Blueprint $table) {
-            $table->string('slug')->unique();
-        });
+        Schema::dropIfExists('blog_tag');
     }
 };

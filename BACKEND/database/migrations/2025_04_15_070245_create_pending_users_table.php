@@ -19,6 +19,13 @@ return new class extends Migration
             $table->string('password');
             $table->string('otp_code');
             $table->timestamp('expires_at');
+            $table->string('title')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('avatar_url')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('department')->nullable();
+            $table->string('academic_year')->nullable();
+            $table->string('specialization')->nullable();
             $table->timestamps();
         });
     }

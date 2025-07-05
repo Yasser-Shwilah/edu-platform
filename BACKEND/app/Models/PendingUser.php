@@ -9,11 +9,18 @@ class PendingUser extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'type',         
+        'type',
         'name',
         'email',
         'password',
         'otp_code',
         'expires_at',
+        'title',
+        'bio',
+        'avatar_url',
+        'phone',
+        'department',
+        'academic_year',
+        'specialization',
     ];
 }
