@@ -1,5 +1,5 @@
 <?php
-    
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,5 +51,11 @@ class TrainingCourse extends Model
     public function examQuestions()
     {
         return $this->hasMany(TrainingExamQuestion::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'course_user')
+            ->withPivot('completed_at')
+            ->withTimestamps();
     }
 }

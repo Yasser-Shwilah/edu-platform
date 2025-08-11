@@ -65,11 +65,11 @@ class ProfileController extends Controller
             'image_url' => asset('storage/' . $path),
         ]);
     }
+
     public function updateStudentProfile(Request $request)
     {
         $user = auth()->user();
 
-        // تأكد أن المستخدم طالب فقط
         if (!$user->isStudent()) {
             return response()->json([
                 'message' => 'فقط الطلاب يمكنهم تعديل هذه البيانات.'
@@ -77,17 +77,23 @@ class ProfileController extends Controller
         }
 
         $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email|unique:users,email,' . $user->id,
             'academic_year' => 'nullable|string',
             'specialization' => 'nullable|string',
         ]);
 
         $user->update([
-            'academic_year' => $request->academic_year,
-            'specialization' => $request->specialization,
+            'name' => $request->name ?? $user->name,
+            'email' => $request->email ?? $user->email,
+            'academic_year' => $request->academic_year ?? $user->academic_year,
+            'specialization' => $request->specialization ?? $user->specialization,
         ]);
 
         return response()->json([
             'message' => 'تم تحديث بيانات الطالب بنجاح.',
+            'name' => $user->name,
+            'email' => $user->email,
             'academic_year' => $user->academic_year,
             'specialization' => $user->specialization,
         ]);

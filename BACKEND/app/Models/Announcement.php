@@ -7,19 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Announcement extends Model
 {
     protected $fillable = [
+        'title',
         'content',
         'publish_date',
         'expiry_date',
         'is_important',
-        'course_id',
         'created_by_id',
         'created_by_type',
     ];
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
+
+
+    protected $casts = [
+        'publish_date' => 'datetime',
+        'expiry_date' => 'datetime',
+    ];
+
+
 
     public function createdBy()
     {

@@ -32,14 +32,23 @@ class TrainingLessonController extends Controller
         $validated = $request->validate([
             'training_course_id' => 'required|exists:training_courses,id',
             'title' => 'required|string|max:255',
-            'video_url' => 'required|url',
+            'video' => 'required|file|mimetypes:video/mp4,video/avi,video/mpeg|max:512000', // 500MB max مثلاً
             'duration' => 'required|integer|min:1',
         ]);
 
-        $lesson = TrainingLesson::create($validated);
+        // تخزين ملف الفيديو في مجلد videos داخل disk public
+        $videoPath = $request->file('video')->store('videos', 'public');
+
+        $lesson = TrainingLesson::create([
+            'training_course_id' => $validated['training_course_id'],
+            'title' => $validated['title'],
+            'video_url' => '/storage/' . $videoPath,  // مسار الفيديو للوصول عبر الويب
+            'duration' => $validated['duration'],
+        ]);
 
         return $this->successResponse('تم إنشاء الدرس بنجاح', $lesson);
     }
+
 
     public function update(Request $request, $id)
     {

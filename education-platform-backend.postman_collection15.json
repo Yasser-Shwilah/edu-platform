@@ -1218,6 +1218,99 @@
 							"response": []
 						},
 						{
+							"name": "all-courses",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "19|eiSQsP4Vgpijy2bPwuZhoGzbxtmv8K7efg9KidzZ897d33ec",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-courses",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Training Course by ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "19|eiSQsP4Vgpijy2bPwuZhoGzbxtmv8K7efg9KidzZ897d33ec",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/training-courses/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"training-courses",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "view subscribed lessons",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -1641,6 +1734,49 @@
 										"student",
 										"profile",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "14|RX8ssBRBk1ieiXuE1dTyRbskoCq4ed6gfHmDCoib3dd63593",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \" حسن\",\r\n  \"email\": \"yasser.hassan@example.com\",\r\n  \"academic_year\": \"third\",\r\n  \"specialization\": \"software\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/update-profile",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"update-profile"
 									]
 								}
 							},
@@ -2390,6 +2526,388 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Learning Tracks",
+					"item": [
+						{
+							"name": "Student - Get all tracks",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/tracks",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Get track details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/tracks/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Get track stats",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/tracks/1/stats",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks",
+										"1",
+										"stats"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Get leaderboard",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/tracks/1/leaderboard",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks",
+										"1",
+										"leaderboard"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Grant progress points",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"userId\":1}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/tracks/1/grant-points",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks",
+										"1",
+										"grant-points"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Assign badges",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/assign-badges/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"assign-badges",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Get available badges",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/available-badges",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"available-badges"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - review",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "22|YKUPKWsqEulGFG6J1Zat3oG5ssEVRIa3I3ws1l9T43d14f28",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"rating\": 5\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/student/tracks/2/review",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks",
+										"2",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student - Enroll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "22|YKUPKWsqEulGFG6J1Zat3oG5ssEVRIa3I3ws1l9T43d14f28",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{student_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"rating\": 5\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/student/tracks/2/enroll",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"student",
+										"tracks",
+										"2",
+										"enroll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Student Projects (By Track)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/tracks/1/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tracks",
+										"1",
+										"projects"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark Project As Done",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/projects/1/complete",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"projects",
+										"1",
+										"complete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -2495,7 +3013,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"type\": \"instructor\",\r\n  \"email\": \"ahmad.zain@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+									"raw": "{\r\n    \"type\": \"instructor\",\r\n  \"email\": \"ahmad3@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3405,7 +3923,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "2|vxVlFI7DOSuLOvtlObaFQLJdFaa4Gdc8cgPabdkk98f8a6cc",
+											"value": "31|mkQp9bbWjetfgcJaxvJVrA7pK3nrWiUPnnS6NA6Q14985f8b",
 											"type": "string"
 										}
 									]
@@ -3413,13 +3931,24 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"course_id\": 2,\r\n  \"title\": \"Lecture Title\",\r\n  \"content\": \"Lecture Content\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "وثيقة",
+											"type": "text"
+										},
+										{
+											"key": "course_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"type": "file",
+											"src": "postman-cloud:///1ef94f82-c16d-49b0-9ba3-74a37975584e"
 										}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://127.0.0.1:8000/api/instructor/lectures",
@@ -3787,7 +4316,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "8|TO63DXDzpUjJBPRAR4QxRh9d7Z1SX1zLFEfjZ61gf28c972e",
+											"value": "10|bliGvANRVtowPFy0KtGkby5yrr6ackL2ZaJcOox9dbbaad30",
 											"type": "string"
 										}
 									]
@@ -3805,7 +4334,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"content\": \"هذا إعلان هام من المحاضر أو الأدمن\",\n  \"publish_date\": \"2025-07-01\",\n  \"expiry_date\": \"2025-07-31\",\n  \"is_important\": true,\n  \"course_id\": 1\n}\n"
+									"raw": "{\n  \"content\": \"هذا إعلان هام من المحاضر أو الأدمن\",\n  \"publish_date\": \"2025-07-01\",\n  \"expiry_date\": \"2025-07-31\",\n  \"is_important\": true\n}\n"
 								},
 								"url": {
 									"raw": "http://127.0.0.1:8000/api/instructor/announcements",
@@ -4656,7 +5185,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "35|wkGvGVEAibcJeU5CSqC9lxGlXkmPCk4s1zbEmLeCf10300b3",
+											"value": "12|WpchIxb0lTW2xTuYFwu7kLdviCiK538QS3P5yUp30110b787",
 											"type": "string"
 										}
 									]
@@ -4669,8 +5198,29 @@
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "{\"training_course_id\": 5, \"title\": \"المقدمة إلى Laravel\", \"content\": \"في هذا الدرس سنبدأ بأساسيات Laravel...\", \"video_url\": \"https://example.com/videos/intro.mp4\",  \"duration\": 15}"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "training_course_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "المقدمة إلى Laravel",
+											"type": "text"
+										},
+										{
+											"key": "duration",
+											"value": "15",
+											"type": "text"
+										},
+										{
+											"key": "video",
+											"type": "file",
+											"src": "postman-cloud:///1f02b2a7-fd54-4730-8111-949a5c7e1fbc"
+										}
+									]
 								},
 								"url": {
 									"raw": "http://127.0.0.1:8000/api/admin/training-lessons",
@@ -4954,6 +5504,254 @@
 					]
 				},
 				{
+					"name": "Learning Tracks",
+					"item": [
+						{
+							"name": "Admin - Get all tracks",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/tracks",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"tracks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin - Create track",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|gV6WMAynlOvFPqO2aDPuDgbsu8VGko5bjLJi5NKe79d92c49",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"مسار جديد\",\n  \"level\": \"مبتدئ\",\n  \"type\": \"أساسي\",\n  \"description\": \"وصف المسار\",\n  \"image\": \"http://example.com/image.jpg\",\n  \"start_date\": \"2025-08-01\",\n  \"credit_hours\": 50,\n  \"prerequisites\": \"لا يوجد\",\n  \"training_course_ids\": [1]  // هنا تحط الـ IDs للكورسات المرتبطة\n}\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/tracks",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"tracks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin - Get track details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/tracks/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"tracks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin - Update track",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"مسار محدث\",\n  \"level\": \"متوسط\",\n  \"type\": \"تخصصي\",\n  \"description\": \"وصف محدث\",\n  \"image\": \"http://example.com/newimage.jpg\",\n  \"start_date\": \"2025-09-01\",\n  \"credit_hours\": 60,\n  \"prerequisites\": \"شروط جديدة\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/tracks/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"tracks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin - Delete track",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/tracks/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"tracks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin - Assign badges",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/assign-badges/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"assign-badges",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Store New Project",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"مشروع بايثون\",\n  \"description\": \"بناء تطبيق بسيط\",\n  \"points\": 50,\n  \"pathway_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"projects"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Admin Register",
 					"request": {
 						"method": "POST",
@@ -5093,7 +5891,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "7|X7YUlR1zkM1iD2vJrBnjjOn7B3xNa4IuBSqM02wv6e753648",
+									"value": "14|bWg0NW1DdO1KlFPjD5SkcGtCBHFpbKKJoNDWW9D3190b4250",
 									"type": "string"
 								}
 							]
@@ -5111,7 +5909,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"content\": \"إعلان \",\n  \"publish_date\": \"2025-05-04\",\n  \"expiry_date\": \"2025-06-01\",\n  \"is_important\": true\n}"
+							"raw": "{\"title\":\"عنوان الاعلان\",\n  \"content\": \"3إعلان \",\n  \"publish_date\": \"2025-8-8\",\n  \"expiry_date\": \"2025-8-10\",\n  \"is_important\": true\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/api/admin/announcements",

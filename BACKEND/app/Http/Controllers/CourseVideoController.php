@@ -24,12 +24,21 @@ class CourseVideoController extends Controller
             return $this->errorResponse('غير مصرح لك بمشاهدة هذا الفيديو، يجب أن تكون مسجلاً في الكورس', 403);
         }
 
+        $video->video_url = asset('storage/' . $video->video_url);
+
         return $this->successResponse('تم جلب الفيديو بنجاح', $video);
     }
+
 
     public function index($courseId)
     {
         $videos = CourseVideo::where('course_id', $courseId)->get();
+
+        $videos->transform(function ($video) {
+            $video->video_url = asset('storage/' . $video->video_url);
+            return $video;
+        });
+
         return $this->successResponse('تم جلب فيديوهات الكورس بنجاح', $videos);
     }
 

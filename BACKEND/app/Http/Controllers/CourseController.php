@@ -55,6 +55,7 @@ class CourseController extends Controller
                 'rating' => $course->rating,
                 'year' => $course->year,
                 'specialization' => $course->specialization,
+                'thumbnail_url' => $course->thumbnail_url,
                 'instructor' => $course->instructor ? [
                     'id' => $course->instructor->id,
                     'name' => $course->instructor->name,
@@ -233,5 +234,70 @@ class CourseController extends Controller
             'watched_videos' => $completed,
             'progress_percent' => $progress
         ]);
+    }
+    public function rate(Request $request)
+    {
+        $validated = $request->validate([
+            'course_id' => 'required|exists:courses,id',
+            'rating' => 'required|numeric|min:1|max:5',
+        ]);
+
+        $userId = auth()->id();
+        $courseId = $validated['course_id'];
+        $ratingValue = $validated['rating'];
+
+        $isEnrolled = Enrollment::where('user_id', $userId)
+            ->where('course_id', $courseId)
+            ->exists();
+
+        if (!$isEnrolled) {
+            return $this->errorResponse('يجب أن تكون مسجلاً في الكورس لتقييمه', 403);
+        }
+
+        $rating = \App\Models\CourseRating::updateOrCreate(
+            [
+                'user_id' => $userId,
+                'course_id' => $courseId,
+            ],
+            [
+                'rating' => $ratingValue,
+            ]
+        );
+
+        $avgRating = \App\Models\CourseRating::where('course_id', $courseId)->avg('rating');
+        Course::where('id', $courseId)->update(['rating' => round($avgRating, 1)]);
+
+        return $this->successResponse('تم تسجيل التقييم بنجاح', [
+            'course_id' => $courseId,
+            'rating' => $ratingValue,
+            'average_rating' => round($avgRating, 1),
+        ]);
+    }
+    public function enroll(Request $request)
+    {
+        $validated = $request->validate([
+            'course_id' => 'required|exists:courses,id',
+        ]);
+
+        $userId = auth()->id();
+        $courseId = $validated['course_id'];
+
+        $alreadyEnrolled = Enrollment::where('user_id', $userId)
+            ->where('course_id', $courseId)
+            ->exists();
+
+        if ($alreadyEnrolled) {
+            return $this->errorResponse('أنت مسجل مسبقاً في هذا الكورس', 409);
+        }
+
+        Enrollment::create([
+            'user_id' => $userId,
+            'course_id' => $courseId,
+        ]);
+
+        $enrollmentCount = Enrollment::where('course_id', $courseId)->count();
+        Course::where('id', $courseId)->update(['enrollment_count' => $enrollmentCount]);
+
+        return $this->successResponse('تم تسجيلك في الكورس بنجاح');
     }
 }

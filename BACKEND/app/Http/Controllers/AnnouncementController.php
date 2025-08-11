@@ -10,13 +10,13 @@ class AnnouncementController extends Controller
 {
     use ResponseTrait;
 
-    public function index(Request $request)
+    public function index()
     {
-        $query = Announcement::with('createdBy', 'course')
-            ->whereDate('expiry_date', '>=', now());
+        $query = Announcement::with('createdBy')
+            ->whereDate('expiry_date', '>=', now()); // فقط الإعلانات غير المنتهية
 
-        if ($request->filled('created_by_type')) {
-            $type = $request->created_by_type;
+        if (request()->filled('created_by_type')) {
+            $type = request()->created_by_type;
 
             $map = [
                 'admin' => \App\Models\Admin::class,
@@ -36,15 +36,11 @@ class AnnouncementController extends Controller
         $result = $announcements->map(function ($announcement) {
             return [
                 'id' => $announcement->id,
+                'title' => $announcement->title,
                 'content' => $announcement->content,
                 'publish_date' => $announcement->publish_date->format('Y-m-d'),
                 'expiry_date' => $announcement->expiry_date ? $announcement->expiry_date->format('Y-m-d') : null,
                 'is_important' => $announcement->is_important,
-                'course' => $announcement->course ? [
-                    'id' => $announcement->course->id,
-                    'title' => $announcement->course->title,
-                ] : null,
-
                 'created_by' => $announcement->createdBy ? [
                     'id' => $announcement->createdBy->id,
                     'name' => $announcement->createdBy->name ?? 'غير معروف',
@@ -53,19 +49,20 @@ class AnnouncementController extends Controller
             ];
         });
 
-        return $this->successResponse('قائمة الإعلانات', ['announcements' => $result]);
+        return $this->successResponse('قائمة الإعلانات العامة', ['announcements' => $result]);
     }
+
 
     public function store(Request $request)
     {
         $request->validate([
+            'title' => 'required|string|max:255',
             'content' => 'required|string',
             'publish_date' => 'required|date',
             'expiry_date' => 'nullable|date|after_or_equal:publish_date',
             'is_important' => 'required|boolean',
-            'course_id' => 'nullable|exists:courses,id',
+            // 'course_id' تم حذفها
         ]);
-
 
         $user = auth()->user();
 
@@ -73,42 +70,41 @@ class AnnouncementController extends Controller
             return $this->errorResponse('غير مصرح لك برفع الإعلان', 401);
         }
 
-
         $announcement = Announcement::create([
+            'title' => $request->title,
             'content' => $request->content,
             'publish_date' => $request->publish_date,
             'expiry_date' => $request->expiry_date,
             'is_important' => $request->is_important,
-            'course_id' => $request->course_id,
             'created_by_id' => $user->id,
             'created_by_type' => get_class($user),
         ]);
-
 
         return $this->successResponse('تم انشاء الإعلان بنجاح.', [
             'announcement' => $announcement,
         ]);
     }
 
-    // تحديث إعلان موجود
     public function update(Request $request, $id)
     {
         $announcement = Announcement::findOrFail($id);
 
         $request->validate([
+            'title' => 'string|max:255|nullable',
             'content' => 'string|nullable',
             'publish_date' => 'date|nullable',
             'expiry_date' => 'date|nullable|after_or_equal:publish_date',
             'is_important' => 'boolean|nullable',
-            'course_id' => 'exists:courses,id|nullable',
+            // 'course_id' تم حذفها
         ]);
 
         $announcement->update($request->only([
+            'title',
             'content',
             'publish_date',
             'expiry_date',
             'is_important',
-            'course_id',
+            // 'course_id' تم حذفها
         ]));
 
         return $this->successResponse('تم تعديل الإعلان بنجاح.', [

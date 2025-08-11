@@ -14,4 +14,8 @@ class TrainingCategory extends Model
     {
         return $this->hasMany(TrainingCourse::class);
     }
+    public function courses()
+    {
+        return $this->hasMany(TrainingCourse::class, 'category_id');
+    }
 }

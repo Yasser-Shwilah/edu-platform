@@ -88,4 +88,13 @@ class TrainingCourseController extends Controller
 
         return $this->successResponse('المزيد من الدورات حسب التصنيف', $courses);
     }
+    public function allCourses()
+    {
+        $courses = TrainingCourse::with('category')
+            ->withCount(['lessons', 'enrollments'])
+            ->latest()
+            ->paginate(10);
+
+        return $this->successResponse('جميع الدورات التدريبية', $courses);
+    }
 }

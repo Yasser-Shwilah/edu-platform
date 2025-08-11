@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminTrainingCourseController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\LearningTrackController;
 
 
 
@@ -74,13 +75,15 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
     // ------------------------------
     Route::get('/profile/{id}', [ProfileController::class, 'show']);
     Route::post('/profile/upload-image', [ProfileController::class, 'uploadProfileImage']);
-    Route::post('/student/update-profile', [ProfileController::class, 'updateStudentProfile']);
+    Route::post('/update-profile', [ProfileController::class, 'updateStudentProfile']);
 
     // ---------------------------
     // Training Courses
     // ---------------------------
     Route::prefix('training-courses')->group(function () {
         Route::get('/', [TrainingCourseController::class, 'index']);
+        Route::get('student/training-courses', [TrainingCourseController::class, 'allCourses']);
+        Route::get('training-courses/{id}', [TrainingCourseController::class, 'show']);
         Route::get('/{id}', [TrainingCourseController::class, 'show']);
         Route::post('/enroll', [TrainingCourseController::class, 'enroll']);
         Route::get('/category/{categoryId}/more', [TrainingCourseController::class, 'loadMoreCoursesByCategory']);
@@ -110,6 +113,23 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
         Route::get('/user/{userId}', [TrainingCertificateController::class, 'userCertificates']);
         Route::post('/{courseId}/issue', [TrainingCertificateController::class, 'checkAndIssueCertificate']);
     });
+
+    // ---------------------------
+    // Learning Truck
+    // ---------------------------
+    Route::get('/tracks', [LearningTrackController::class, 'index']); // عرض جميع المسارات
+    Route::get('/tracks/{id}', [LearningTrackController::class, 'show']); // تفاصيل مسار
+    Route::get('/tracks/{trackId}/stats', [LearningTrackController::class, 'studentTrackStats']); // إحصائيات الطالب لمسار
+    Route::get('/tracks/{trackId}/leaderboard', [LearningTrackController::class, 'leaderboard']); // لوحة المتصدرين
+    Route::post('/tracks/{trackId}/grant-points', [LearningTrackController::class, 'grantProgressPoints']);
+    // منح نقاط التقدم
+    Route::post('/assign-badges/{userId}', [LearningTrackController::class, 'assignBadgeBasedOnPoints']); // تخصيص الشارات
+    Route::get('/available-badges', [LearningTrackController::class, 'availableBadges']); // عرض الشارات
+    Route::post('/tracks/{trackId}/review', [LearningTrackController::class, 'reviewTrack']);
+    Route::post('/tracks/{trackId}/enroll', [LearningTrackController::class, 'enrollStudent']);
+    Route::get('/tracks/{trackId}/projects', [LearningTrackController::class, 'getStudentProjects']);
+    Route::post('/projects/{projectId}/complete', [LearningTrackController::class, 'markProjectAsDone']);
+
 
     // Courses
     Route::prefix('courses')->group(function () {
@@ -153,7 +173,7 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
 
     // Announcements (View Only)
     Route::prefix('announcements')->group(function () {
-        Route::get('/course/{courseId}', [AnnouncementController::class, 'index']);
+        Route::get('/', [AnnouncementController::class, 'index']);
     });
 
     // Blog Routes for Student
@@ -226,7 +246,7 @@ Route::middleware('auth:sanctum')->prefix('instructor')->group(function () {
 
     // Announcements 
     Route::prefix('announcements')->group(function () {
-        Route::get('/course/{courseId}', [AnnouncementController::class, 'index']);
+        Route::get('/', [AnnouncementController::class, 'index']);
         Route::post('/', [AnnouncementController::class, 'store']);
         Route::put('/{id}', [AnnouncementController::class, 'update']);
         Route::delete('/{id}', [AnnouncementController::class, 'destroy']);
@@ -280,11 +300,21 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
     // Announcements Management 
     Route::prefix('announcements')->group(function () {
-        Route::get('/course/{courseId}', [AnnouncementController::class, 'index']);
+        Route::get('/', [AnnouncementController::class, 'index']);
         Route::post('/', [AnnouncementController::class, 'store']);
         Route::put('/{id}', [AnnouncementController::class, 'update']);
         Route::delete('/{id}', [AnnouncementController::class, 'destroy']);
     });
+
+    //Learning Truck
+    Route::get('/tracks', [LearningTrackController::class, 'index']); // عرض المسارات
+    Route::post('/tracks', [LearningTrackController::class, 'store']); // إنشاء مسار
+    Route::get('/tracks/{id}', [LearningTrackController::class, 'show']); // تفاصيل مسار
+    Route::put('/tracks/{id}', [LearningTrackController::class, 'update']); // تحديث مسار
+    Route::delete('/tracks/{id}', [LearningTrackController::class, 'destroy']); // حذف مسار
+    Route::post('/projects', [LearningTrackController::class, 'storeProject']);
+    Route::post('/assign-badges/{userId}', [LearningTrackController::class, 'assignBadgeBasedOnPoints']); // منح شارات
+    Route::get('/available-badges', [LearningTrackController::class, 'availableBadges']);
 
     // Admin Logout
     Route::post('logout', [AdminAuthController::class, 'logout']);

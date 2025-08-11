@@ -13,7 +13,6 @@ class BlogController extends Controller
 {
     use ResponseTrait;
 
-    // قائمة التدوينات
     public function index(Request $request)
     {
         $type = $request->query('type');
@@ -30,7 +29,6 @@ class BlogController extends Controller
         ]);
     }
 
-    // إنشاء تدوينة جديدة
     public function store(Request $request)
     {
         $request->validate([
@@ -57,7 +55,6 @@ class BlogController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        // ربط الوسوم
         if ($request->filled('tags')) {
             $tagsIds = [];
             foreach ($request->tags as $tagName) {
@@ -73,7 +70,6 @@ class BlogController extends Controller
         ]);
     }
 
-    // عرض تدوينة مفردة
     public function show($id)
     {
         $post = Blog::with(['author', 'tags', 'comments.user'])->findOrFail($id);
@@ -82,7 +78,6 @@ class BlogController extends Controller
         ]);
     }
 
-    // تعديل التدوينة
     public function update(Request $request, $id)
     {
         $post = Blog::findOrFail($id);
@@ -112,7 +107,6 @@ class BlogController extends Controller
         ]);
     }
 
-    // حذف التدوينة
     public function destroy($id)
     {
         $post = Blog::findOrFail($id);
@@ -125,7 +119,6 @@ class BlogController extends Controller
         return $this->successResponse('تم حذف المنشور');
     }
 
-    // التصويت على منشور
     public function vote(Request $request, $id)
     {
         $request->validate([
@@ -142,7 +135,6 @@ class BlogController extends Controller
         return $this->successResponse('تم التصويت', ['post' => $post]);
     }
 
-    // حفظ / إلغاء حفظ منشور
     public function toggleSave(Request $request, $id)
     {
         $post = Blog::findOrFail($id);
@@ -154,7 +146,6 @@ class BlogController extends Controller
         return $this->successResponse($message, ['post' => $post]);
     }
 
-    // عرض المنشورات المحفوظة
     public function savedPosts(Request $request)
     {
         $posts = $request->user()->savedPosts()->with('author', 'tags')->paginate(10);
@@ -162,7 +153,6 @@ class BlogController extends Controller
         return $this->successResponse('المنشورات المحفوظة', ['posts' => $posts]);
     }
 
-    // البحث في المنشورات
     public function search(Request $request)
     {
         $q = $request->query('q');

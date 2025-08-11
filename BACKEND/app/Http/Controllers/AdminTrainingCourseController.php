@@ -17,8 +17,6 @@ class AdminTrainingCourseController extends Controller
     // إنشاء دورة تدريبية
     public function store(Request $request)
     {
-
-
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -26,7 +24,8 @@ class AdminTrainingCourseController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg',
             'lessons' => 'required|array|min:1',
             'lessons.*.title' => 'required|string|max:255',
-            'lessons.*.video_url' => 'required|url',
+            'lessons.*.video_url' => 'nullable|string',
+            'lessons.*.video_file' => 'nullable|file|mimes:mp4,avi,mov',
             'lessons.*.duration' => 'required|integer|min:1',
             'certificate_type' => 'required|in:attendance,official',
             'exam_questions' => 'nullable|array',
@@ -42,8 +41,10 @@ class AdminTrainingCourseController extends Controller
             DB::beginTransaction();
 
             $imagePath = null;
+            $imageUrl = null;
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('training_courses', 'public');
+                $imageUrl = asset('storage/' . $imagePath);
             }
 
             $course = TrainingCourse::create([
@@ -59,11 +60,22 @@ class AdminTrainingCourseController extends Controller
                 'is_free' => true,
             ]);
 
-            foreach ($request->lessons as $lesson) {
+            foreach ($request->lessons as $index => $lesson) {
+                $videoUrl = $lesson['video_url'] ?? null;
+
+                if (isset($lesson['video_file']) && $lesson['video_file'] instanceof \Illuminate\Http\UploadedFile) {
+                    $videoPath = $lesson['video_file']->store('training_videos', 'public');
+                    $videoUrl = asset('storage/' . $videoPath);
+                }
+
+                if ($videoUrl && !preg_match('/^https?:\/\//', $videoUrl)) {
+                    $videoUrl = asset(ltrim($videoUrl, '/'));
+                }
+
                 TrainingLesson::create([
                     'training_course_id' => $course->id,
                     'title' => $lesson['title'],
-                    'video_url' => $lesson['video_url'],
+                    'video_url' => $videoUrl,
                     'duration' => $lesson['duration'],
                 ]);
             }
@@ -83,6 +95,9 @@ class AdminTrainingCourseController extends Controller
             }
 
             DB::commit();
+
+            $course->image_url = $imageUrl;
+
             return $this->successResponse('تم إنشاء الدورة بنجاح', $course);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -90,7 +105,7 @@ class AdminTrainingCourseController extends Controller
         }
     }
 
-    // إنشاء تصنيف جديد
+
     public function storeCategory(Request $request)
     {
 
@@ -106,7 +121,6 @@ class AdminTrainingCourseController extends Controller
         return $this->successResponse('تم إنشاء التصنيف بنجاح', $category);
     }
 
-    // عرض كل الدورات
     public function index()
     {
 
@@ -115,7 +129,6 @@ class AdminTrainingCourseController extends Controller
         return $this->successResponse('قائمة الدورات التدريبية', $courses);
     }
 
-    // عرض تفاصيل دورة واحدة
     public function show($id)
     {
 
@@ -124,7 +137,6 @@ class AdminTrainingCourseController extends Controller
         return $this->successResponse('تفاصيل الدورة التدريبية', $course);
     }
 
-    // تحديث دورة
     public function update(Request $request, $id)
     {
 
@@ -164,7 +176,6 @@ class AdminTrainingCourseController extends Controller
         }
     }
 
-    // حذف دورة
     public function destroy($id)
     {
 
